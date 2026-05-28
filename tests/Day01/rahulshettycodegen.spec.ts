@@ -35,13 +35,23 @@ test('test', async ({ page }) => {
 
   await page.getByRole('button', { name: ' Add To Cart' }).first().click();
   await page.getByRole('button', { name: '   Cart' }).click();
+
+  await expect(page.locator('app-profile')).toContainText('ADIDAS ORIGINAL');
   await page.getByRole('button', { name: 'Checkout❯' }).click();
+
+  await expect(page.locator('section')).toContainText('tradahenish' + randomNumber + '@gmail.com');
   await page.getByRole('textbox', { name: 'Select Country' }).click();
-  await page.getByRole('textbox', { name: 'Select Country' }).pressSequentially('india', {delay: 150});
+
+  //Instead of using the fill method, we can use the pressSequentially method to type the country name with a delay between each keystroke, so that the dropdown can load the options based on the input.
+  await page.getByRole('textbox', { name: 'Select Country' }).pressSequentially('india', { delay: 150 });
   await page.getByRole('button', { name: ' India' }).click();
   await page.getByText('Place Order').click();
   
+  await expect(page.getByRole('heading', { name: 'Thankyou for the order.' })).toBeVisible();
+
   await page.getByRole('button', { name: '   ORDERS' }).click();
-  await page.getByRole('button', { name: 'View' }).click();
+
+  await page.getByRole('button', { name: 'View' }).first().click();
   await page.getByRole('button', { name: 'Sign Out' }).click();
 });
+
