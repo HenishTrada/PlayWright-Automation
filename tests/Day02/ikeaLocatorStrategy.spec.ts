@@ -17,12 +17,12 @@ test("login Flow", async ({page}) => {
     await page.locator("nav[aria-label='Shopping links']").getByText("Log in").click();
  
     //using getByLabel locator strategy
-    const emailInput = page.getByLabel("Email or Verified Mobile Number");
-    await expect(emailInput).toBeVisible();
+    const emailInput = page.getByRole('textbox', { name: 'Email or Verified Mobile Number' });
+    await emailInput.waitFor();
     await emailInput.fill("tradahenish94@gmail.com");
 
-    const passwordInput = page.getByLabel("Password");
-    await expect(passwordInput).toBeVisible();
+    const passwordInput = page.getByRole('textbox', { name: 'Password' });
+    await passwordInput.waitFor();
     await passwordInput.fill("HeNiSh94");
  
     //using id locator strategy
