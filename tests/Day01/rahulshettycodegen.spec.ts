@@ -55,3 +55,16 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Sign Out' }).click();
 });
 
+
+test("Locator Strategy", async ({page}) => {
+    await page.goto("https://www.etsy.com/");
+
+    //--------perform using ".getByRole"------------------
+    await page.getByRole('button', { name: 'Sign in' });
+
+    //--------perform using ".getByLabel"------------------
+    await page.getByLabel("Email address").fill("tradahenish94@gmail.com");
+
+    //--------perform using ".locator"------------------
+    await page.locator('[name="password"]').fill("HeNiSh@94");
+});
