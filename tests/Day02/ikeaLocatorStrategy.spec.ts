@@ -36,7 +36,7 @@ test("search for a product", async ({page}) => {
  
     await page.goto("https://www.ikea.com/in/en/");
  
-     const cookiesBanner = page.locator(".ot-sdk-row");
+    const cookiesBanner = page.locator(".ot-sdk-row");
  
     //using getByRole locator strategy
     if(await cookiesBanner.isVisible()) {
