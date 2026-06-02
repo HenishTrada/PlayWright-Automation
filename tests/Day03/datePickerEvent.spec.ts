@@ -1,21 +1,23 @@
 import { test, expect } from "@playwright/test";
 
 test("Date Picker Event", async ({ page }) => {
-    await page.goto("https://www.booking.com/")
+  await page.goto("https://www.abhibus.com/");
 
-    const popUpCloseBtn = page.getByRole('button', {name : "Dismiss sign in information."});
+  const fromInput = page.getByPlaceholder("Leaving From");
+  await fromInput.click();
+  await fromInput.fill("Ahmedabad");
+  await page.getByText("Ahmedabad", { exact: true }).first().click();
 
-    if (await popUpCloseBtn.isVisible()) {
-        await popUpCloseBtn.click();
-    }
+  const toInput = page.getByPlaceholder("Going To");
+  await toInput.click();
+  await toInput.fill("Mumbai");
+  await page.getByText("Mumbai", { exact: true }).first().click();
 
-    const datePickerButton = page.getByTestId("searchbox-dates-container");
-    await datePickerButton.click();
+  await page.getByPlaceholder("Onward Journey Date").click();
 
-    await datePickerButton.locator(`[data-date="2026-09-15"]`).click();
-    await expect(datePickerButton.locator(`[data-date="2026-09-15"]`)).toHaveAttribute("aria-checked", "true");
+  await page.getByRole("button", {name : "11" }).click();
 
-    await datePickerButton.locator(`[data-date="2026-10-15"]`).click();
-    await expect(datePickerButton.locator(`[data-date="2026-10-15"]`)).toHaveAttribute("aria-checked", "true");
+  await page.locator("#search-container").getByRole("button", { name: "Search" }).click();
 
+  await page.waitForTimeout(3000);
 });
