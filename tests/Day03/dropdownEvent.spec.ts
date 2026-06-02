@@ -7,13 +7,17 @@ test("Drop Down Event", async ({page}) => {
     await dropdown_1.click();
     await dropdown_1.locator('.item').getByText("Male").first().click();
 
-    const dropdown_2 =  page.locator('.another.dropdown.example').locator(`.ui.dropdown.selection`).first();
+    //using css selector
+//    const dropdown_2 =  page.locator('.another.dropdown.example').locator(`.ui.dropdown.selection`).first();
+//    await dropdown_2.click();
+//    await dropdown_2.locator('.menu .item[data-value="1"]').click();
+
+    //using xpath selector
+    await page.locator("//div[contains(@class,'another dropdown example')]//div[contains(@class,'ui dropdown selection')]").click();
+    await page.locator("//div[@class='menu transition visible']//div[@class='item'][normalize-space()='Male']").click();
+ 
 
 
-    const dropdown_3 = page.getByRole('textbox').first();
-    await dropdown_3.click();
-    await dropdown_3.pressSequentially("India");
-    await dropdown_3.getByText('India').first().click();
 
 
     await page.waitForTimeout(2000);
