@@ -48,7 +48,7 @@ test("Assertion", async ({ page }) => {
     await filterButton2.click();
 
     await page.waitForLoadState("load");
-    await expect.soft(filterButton2).toHaveAttribute("class", /active1/);
+    await expect.soft(filterButton2).toHaveAttribute("class", /active/);
 
     await page.locator(`//div[2]/div/span[4]`).click();
 

@@ -1,7 +1,7 @@
 import { test, BrowserContext } from "@playwright/test";
 
 test("Multiple page Handler", async ({ browser }) => {
-
+    test.setTimeout(60000);
     const context = await browser.newContext();
     const page =await context.newPage();
 

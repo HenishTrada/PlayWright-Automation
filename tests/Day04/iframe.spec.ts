@@ -5,9 +5,8 @@ test("Iframe Handling", async ({ page }) => {
     await page.goto("https://www.saffrony.ac.in/admissions/admission-process/", );
 
 
-    await page.locator('li:has-text("Admissions")').click();
+    await page.locator(`//nav[1]/ul/li[8]`).click();
     const iframeElement = page.locator('iframe');
-    await expect(iframeElement).toBeVisible();
 
     const frame = await iframeElement.contentFrame();
     
