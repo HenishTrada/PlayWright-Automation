@@ -1,16 +1,19 @@
 import test, { expect } from "@playwright/test";
 
 test("Hover Event", async ({ page }) => {
-    await page.goto("https://www.flipkart.com/");
+    await page.goto("https://www.flipkart.com/", {
+        waitUntil: "domcontentloaded",
+    });
 
     const loginPop = page.locator(".q7ywiQ");
+    await expect(loginPop).toBeVisible();
 
     if (await loginPop.isVisible()) {
-        await loginPop.getByRole('button', { name: '✕' }).click();
+        await loginPop.locator('.b3wTlE').click();
     }
 
     // Generic click
-    await page.getByRole('button', { name: "Search for Products, Brands and More" }).click();
+    // await page.getByRole('button', { name: "Search for Products, Brands and More" }).click();
 
     const searchBar = page.getByPlaceholder("Search for Products, Brands and More").and(page.getByRole("textbox"));
     await searchBar.fill("mobile");
