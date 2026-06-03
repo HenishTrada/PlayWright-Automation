@@ -1,13 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
 
-async function closeSignInPopup(page: Page) {
-  const closeBtn = page.locator('.fd1bba3c6c.a5d282bede').getByRole("button");
-
-  if (await closeBtn.isVisible()) {
-    await closeBtn.click();
-  }
-}
-
 async function selectCustomDate(page: Page, targetDate: string) {
 
   const calendar = page.getByTestId("searchbox-datepicker-calendar");
@@ -41,7 +33,12 @@ test("Booking.com date picker selection", async ({ page }) => {
     waitUntil: "domcontentloaded",
   });
 
-  await closeSignInPopup(page);
+  const closeBtn = page.locator('.fd1bba3c6c.a5d282bede').getByRole("button");
+  await closeBtn.click();
+
+  // if (await closeBtn.isVisible()) {
+  //   await closeBtn.click();
+  // }
   await page.getByTestId("searchbox-dates-container").click();
   await expect(page.getByTestId("searchbox-datepicker-calendar")).toBeVisible();
   await selectCustomDate(page, "2026-09-15");
