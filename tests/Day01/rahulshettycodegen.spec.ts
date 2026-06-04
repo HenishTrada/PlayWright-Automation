@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('test', async ({ page }) => {
   await page.goto('https://rahulshettyacademy.com/client/#/auth/register');
 
-  const randomNumber = Math.floor(Math.random() * 1000);
+  const randomNumber = Math.floor(Math.random() * 10000);
 
   await page.getByRole('textbox', { name: 'First Name' }).click();
   await page.getByRole('textbox', { name: 'First Name' }).fill('henish');
