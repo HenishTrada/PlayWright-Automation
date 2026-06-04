@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class AmazonHomePage{
 
@@ -17,7 +17,8 @@ export class AmazonHomePage{
     }
 
     async searchingProduct(productName : string): Promise<void>{
-        await this.searchBar.fill(productName);
+        await expect(this.searchBar).toBeVisible();
+        await this.searchBar.pressSequentially(productName, {delay : 200});
         await this.searchBar.press("Enter");
     }
 }
