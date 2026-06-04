@@ -17,7 +17,7 @@ export class AmazonHomePage{
     }
 
     async searchingProduct(productName : string): Promise<void>{
-        await expect(this.searchBar).toBeVisible();
+        await this.searchBar.waitFor({state : "visible"});
         await this.searchBar.pressSequentially(productName, {delay : 200});
         await this.searchBar.press("Enter");
     }
