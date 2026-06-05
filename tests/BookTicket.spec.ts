@@ -21,7 +21,7 @@ test("Book Ticket", async ({page}) => {
   await BusFilter.selectingDroppingCity();
   await BusFilter.busFilter();
   await page.waitForTimeout(2000);
-  await page.pause();
+//   await page.pause();
   await BusFilter.selectBusSeat();
   await BusFilter.selectBoardingPoint();
 });
