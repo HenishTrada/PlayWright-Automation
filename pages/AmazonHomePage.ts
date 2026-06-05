@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
+import { ENV } from "../config/env"
 
 export class AmazonHomePage{
 
@@ -13,7 +14,7 @@ export class AmazonHomePage{
     }
 
     async amazonURL(){
-        await this.page.goto("https://www.amazon.in/");
+        await this.page.goto(ENV.BASE_URL);
     }
 
     async searchingProduct(productName : string): Promise<void>{
