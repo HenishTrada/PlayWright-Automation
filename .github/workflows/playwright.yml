@@ -14,9 +14,9 @@ on:
           - stage
 
   push:
-    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration]
+    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
   pull_request:
-    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration]
+    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
 
 jobs:
   test:

@@ -12,6 +12,7 @@ export class BusSelectionPage {
     seatLayoutContainer: Locator;
     BoardingAndDroppingTabs: Locator;
     BoardingAndDroppingList: Locator;
+    ProceedButton : Locator;
 
     constructor(page: Page) {
 
@@ -21,10 +22,11 @@ export class BusSelectionPage {
         this.droppingPointsList = page.locator('#popular-filters-scrollable').first();;
         this.busACFilterButton = page.locator(`//div[2]/div/span[4]`);
         this.busNonAcFilterButton = page.locator(`//div[2]/div/span[1]`).first();
-        this.selectBus = page.locator('#service-4255579535').getByRole("button", { name: `Select Seats` });
-        this.seatLayoutContainer = page.locator('#service-4255579535').locator("#seat-layout-container");
-        this.BoardingAndDroppingTabs = page.locator('#service-4255579535').locator("#seating-container").locator(".tabs-actions");
-        this.BoardingAndDroppingList = page.locator('#service-4255579535').locator("#seating-container").locator(`.tabs-viewport`);
+        this.selectBus = page.locator('#service-4255579535');
+        this.seatLayoutContainer = this.selectBus.locator("#seat-layout-container");
+        this.BoardingAndDroppingTabs = this.selectBus.locator(`.tabs-actions a`);
+        this.BoardingAndDroppingList = this.selectBus.locator(`.tabs-viewport .scrollable-container`);
+        this.ProceedButton = this.selectBus.getByRole('button', { name: 'Proceed' });
     }
 
     async boardingPointStatus() {
@@ -60,9 +62,9 @@ export class BusSelectionPage {
     }
 
     async selectBusSeat() {
-        await this.selectBus.scrollIntoViewIfNeeded();
+        await this.selectBus.getByRole("button", { name: `Select Seats` }).scrollIntoViewIfNeeded();
         await this.page.waitForLoadState("load");
-        await this.selectBus.click();
+        await this.selectBus.getByRole("button", { name: `Select Seats` }).click();
 
         const availableSeats_1 = this.seatLayoutContainer.locator(`button.seat.seat-button`);
         await availableSeats_1.first().waitFor({ state: "visible" });
@@ -78,12 +80,28 @@ export class BusSelectionPage {
     }
 
     async selectBoardingPoint() {
-        const boardingTabStatus = await this.BoardingAndDroppingTabs.getByText("Boarding Points").nth(1);
+        const boardingTabStatus = this.BoardingAndDroppingTabs.first();
         await expect(boardingTabStatus).toHaveAttribute("class", /active/); 
-
-        const boardingLocation = this.BoardingAndDroppingList.locator(`.radio-container`).filter({ hasText: `Iscon Char Rasta.` });
-        await boardingLocation.scrollIntoViewIfNeeded();
+        // await this.page.pause();
+        const boardingLocation = this.BoardingAndDroppingList.locator('#place-195361-4255579535');
         await boardingLocation.waitFor({ state: "visible" });
         await boardingLocation.click();
+    }
+
+    async selectDroppingPoint(){
+        const selectDroppingTab = this.BoardingAndDroppingTabs.nth(1);
+        // await selectDroppingTab.click();
+        await expect(selectDroppingTab).toHaveAttribute("class", /active/);
+
+        const droppingLocation = this.BoardingAndDroppingList.locator(`#place-317941-4255579535` );
+        await this.BoardingAndDroppingList.scrollIntoViewIfNeeded();
+        await droppingLocation.click();
+
+        await this.page.waitForTimeout(2000);
+
+        await this.ProceedButton.waitFor({state : "visible"});
+        await this.ProceedButton.click();
+
+        await this.page.waitForLoadState("load");
     }
 }
