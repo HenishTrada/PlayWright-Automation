@@ -24,7 +24,7 @@ test.describe("Booking Flow", () => {
     await BusSearch.pressSearchButton();
   });
   
-  test.only("Singel seat selection", async ({page}) => {
+  test("Single seat selection", async ({page}) => {
   
     // const BusSearch = new AbhiBusHomePage(page);
     const BusFilter = new BusSelectionPage(page);
