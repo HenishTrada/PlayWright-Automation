@@ -12,7 +12,7 @@ export class BusSelectionPage {
     seatLayoutContainer: Locator;
     BoardingAndDroppingTabs: Locator;
     BoardingAndDroppingList: Locator;
-    ProceedButton : Locator;
+    ProceedButton: Locator;
 
     constructor(page: Page) {
 
@@ -61,10 +61,24 @@ export class BusSelectionPage {
         await expect(this.busNonAcFilterButton).toHaveAttribute("style", /pointer-events: none;/);
     }
 
-    async selectBusSeat() {
-        await this.selectBus.getByRole("button", { name: `Select Seats` }).scrollIntoViewIfNeeded();
-        await this.page.waitForLoadState("load");
-        await this.selectBus.getByRole("button", { name: `Select Seats` }).click();
+    async selectBusSeat(seatNo: number): Promise<void> {
+
+        const selectSeatsButton = this.selectBus.getByRole("button", {
+            name: "Select Seats",
+        });
+
+        const hideSeatsButton = this.selectBus.getByRole("button", {
+            name: "Hide Seats",
+        });
+
+        if (await selectSeatsButton.isVisible().catch(() => false)) {
+            await selectSeatsButton.scrollIntoViewIfNeeded();
+            await this.page.waitForLoadState("load");
+            await selectSeatsButton.click();
+        } else {
+            await expect(hideSeatsButton).toBeVisible();
+        }
+
 
         const availableSeats_1 = this.seatLayoutContainer.locator(`button.seat.seat-button`);
         await availableSeats_1.first().waitFor({ state: "visible" });
@@ -73,22 +87,27 @@ export class BusSelectionPage {
         if (seatCount_1 === 0) {
             throw new Error("No available seats found");
         }
-        else {
-            await availableSeats_1.first().waitFor({ state: "visible" });
-            await availableSeats_1.first().click();
+
+        if (seatNo >= seatCount_1) {
+            throw new Error(
+                `Seat index ${seatNo} is invalid. Available seats: ${seatCount_1}`
+            );
         }
+
+        await availableSeats_1.first().waitFor({ state: "visible" });
+        await availableSeats_1.nth(seatNo).click();
     }
 
     async selectBoardingPoint() {
         const boardingTabStatus = this.BoardingAndDroppingTabs.first();
-        await expect(boardingTabStatus).toHaveAttribute("class", /active/); 
+        await expect(boardingTabStatus).toHaveAttribute("class", /active/);
         // await this.page.pause();
         const boardingLocation = this.BoardingAndDroppingList.locator('.container  ').first();
         await boardingLocation.waitFor({ state: "visible" });
         await boardingLocation.click();
     }
 
-    async selectDroppingPoint(){
+    async selectDroppingPoint() {
         const selectDroppingTab = this.BoardingAndDroppingTabs.nth(1);
         // await selectDroppingTab.click();
         await expect(selectDroppingTab).toHaveAttribute("class", /active/);
@@ -99,7 +118,7 @@ export class BusSelectionPage {
 
         await this.page.waitForTimeout(2000);
 
-        await this.ProceedButton.waitFor({state : "visible"});
+        await this.ProceedButton.waitFor({ state: "visible" });
         await this.ProceedButton.click();
 
         await this.page.waitForLoadState("load");

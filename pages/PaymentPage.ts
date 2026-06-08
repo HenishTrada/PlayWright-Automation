@@ -21,6 +21,7 @@ export class PaymentPage{
     }
 
     async selectingpaymentOption(){
+        await this.page.waitForLoadState("load");
         await this.UPITab.waitFor({state : "visible"});
         await this.UPITab.click();
         await expect(this.UPITab).toHaveAttribute("class", /bg-common-white/);
