@@ -21,7 +21,6 @@ export class PaymentPage{
     }
 
     async selectingpaymentOption(){
-        await expect(this.Heading).toBeVisible();
         await this.UPITab.waitFor({state : "visible"});
         await this.UPITab.click();
         await expect(this.UPITab).toHaveAttribute("class", /bg-common-white/);
@@ -30,6 +29,8 @@ export class PaymentPage{
     async GenerateQRCode(){
         await expect(this.QrImage.locator("img")).toHaveAttribute("class", /blur-sm/);
         await this.QRButton.click();
+
+        await this.QrImage.locator("svg").waitFor({state : "visible"});
         await expect(this.QrImage.locator("svg")).toBeVisible();
     }
 }

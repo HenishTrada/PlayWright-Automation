@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
- 
+import { ENV } from "../config/env";
 export class AbhiBusHomePage {
  
     page: Page;
@@ -18,8 +18,17 @@ export class AbhiBusHomePage {
  
     }
  
-    async AbhiBusURL(url : string) : Promise<void> {
-        await this.page.goto(url);
+    async AbhiBusURL(): Promise<void> {
+    await this.page.goto(ENV.BASE_URL, {
+        waitUntil: "domcontentloaded",
+        timeout: 60000,
+    });
+
+    await expect(this.page).toHaveURL(/abhibus/);
+
+    await expect(this.fromInput).toBeVisible({
+        timeout: 30000,
+    });
     }
  
     async fromInputField(leavingCityName: string): Promise<void>{

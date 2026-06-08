@@ -22,7 +22,7 @@ export class BusSelectionPage {
         this.droppingPointsList = page.locator('#popular-filters-scrollable').first();;
         this.busACFilterButton = page.locator(`//div[2]/div/span[4]`);
         this.busNonAcFilterButton = page.locator(`//div[2]/div/span[1]`).first();
-        this.selectBus = page.locator('#service-4255579535');
+        this.selectBus = page.locator('#service-cards-container .container.card').first();
         this.seatLayoutContainer = this.selectBus.locator("#seat-layout-container");
         this.BoardingAndDroppingTabs = this.selectBus.locator(`.tabs-actions a`);
         this.BoardingAndDroppingList = this.selectBus.locator(`.tabs-viewport .scrollable-container`);
@@ -83,7 +83,7 @@ export class BusSelectionPage {
         const boardingTabStatus = this.BoardingAndDroppingTabs.first();
         await expect(boardingTabStatus).toHaveAttribute("class", /active/); 
         // await this.page.pause();
-        const boardingLocation = this.BoardingAndDroppingList.locator('#place-195361-4255579535');
+        const boardingLocation = this.BoardingAndDroppingList.locator('.container  ').first();
         await boardingLocation.waitFor({ state: "visible" });
         await boardingLocation.click();
     }
@@ -93,7 +93,7 @@ export class BusSelectionPage {
         // await selectDroppingTab.click();
         await expect(selectDroppingTab).toHaveAttribute("class", /active/);
 
-        const droppingLocation = this.BoardingAndDroppingList.locator(`#place-317941-4255579535` );
+        const droppingLocation = this.BoardingAndDroppingList.locator('.container  ').first();
         await this.BoardingAndDroppingList.scrollIntoViewIfNeeded();
         await droppingLocation.click();
 

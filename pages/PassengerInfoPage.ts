@@ -43,7 +43,7 @@ export class PassengerInfoPage{
 
         await this.MobileNumber.waitFor({state : "visible"});
         await this.MobileNumber.click();
-        await this.MobileNumber.pressSequentially(passengerDetail.mobileNumber, {delay : 200});
+        await this.MobileNumber.pressSequentially(passengerDetail.mobileNumber);
 
         await this.EmailId.click();
         await this.EmailId.pressSequentially(passengerDetail.emailId);
@@ -59,7 +59,6 @@ export class PassengerInfoPage{
         await this.TravelAssured.check()
         await expect(this.TravelAssured).toBeChecked();
         await this.ContinueLink.click();
-        await this.page.waitForTimeout(3000);
 
     }
 

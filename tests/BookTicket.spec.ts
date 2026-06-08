@@ -12,7 +12,7 @@ test("Book Ticket", async ({page}) => {
   const PassengerInfo = new PassengerInfoPage(page);
   const PaymentModel = new PaymentPage(page);
  
-  await BusSearch.AbhiBusURL(ENV.BASE_URL);
+  await BusSearch.AbhiBusURL();
   await BusSearch.fromInputField(ENV.BOARDING_CITY);
   await BusSearch.toInputField(ENV.DESTINATION_CITY); 
   await BusSearch.selectDate(ENV.DATE_OF_JOURNEY);
@@ -35,7 +35,10 @@ test("Book Ticket", async ({page}) => {
   await PassengerInfo.ClosingLoginModel();
   await PassengerInfo.FillingUserInfo(ENV.PassengerDetail);
 
+  await page.waitForLoadState("load");
+
   await PaymentModel.selectingpaymentOption();
   await PaymentModel.GenerateQRCode();
 
+  
 });
