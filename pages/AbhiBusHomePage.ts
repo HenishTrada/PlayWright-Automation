@@ -18,8 +18,8 @@ export class AbhiBusHomePage {
  
     }
  
-    async AbhiBusURL() {
-        await this.page.goto("https://www.abhibus.com/");
+    async AbhiBusURL(url : string) : Promise<void> {
+        await this.page.goto(url);
     }
  
     async fromInputField(leavingCityName: string): Promise<void>{
@@ -37,10 +37,10 @@ export class AbhiBusHomePage {
         await expect(this.toInput).toHaveValue(destinationCityName);
     }
  
-    async selectDate(){
+    async selectDate(date : string ) : Promise<void>{
         await this.datePicker.click();
-        await this.page.getByRole("button", { name: "11" }).click();
-        await expect(this.datePicker).toHaveValue(`11/06/2026`);
+        await this.page.getByRole("button", { name: date }).click();
+        await expect(this.datePicker).toHaveValue(`${date}/06/2026`);
     }
  
     async pressSearchButton(){

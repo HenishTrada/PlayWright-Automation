@@ -1,5 +1,11 @@
 import { expect, Locator, Page } from "@playwright/test";
 
+export interface PassengerDetails {
+  mobileNumber: string;
+  emailId: string;
+  name: string;
+  age: string;
+}
 
 export class PassengerInfoPage{
 
@@ -33,20 +39,20 @@ export class PassengerInfoPage{
         await this.CloseButton.click();
     }
 
-    async FillingUserInfo(MobileNumber : string, EmailId : string) : Promise<void>{
+    async FillingUserInfo(passengerDetail : PassengerDetails) : Promise<void>{
 
         await this.MobileNumber.waitFor({state : "visible"});
         await this.MobileNumber.click();
-        await this.MobileNumber.pressSequentially(MobileNumber, {delay : 200});
+        await this.MobileNumber.pressSequentially(passengerDetail.mobileNumber, {delay : 200});
 
         await this.EmailId.click();
-        await this.EmailId.pressSequentially(EmailId);
+        await this.EmailId.pressSequentially(passengerDetail.emailId);
 
         await this.Name.click();
-        await this.Name.pressSequentially("Henish Trada");
+        await this.Name.pressSequentially(passengerDetail.name);
 
         await this.Age.click();
-        await this.Age.pressSequentially("21");
+        await this.Age.pressSequentially(passengerDetail.age);
 
         await this.Gender.click();
 

@@ -3,6 +3,7 @@ import { AbhiBusHomePage } from "../pages/AbhiBusHomePage";
 import { BusSelectionPage } from "../pages/BusSelectionPage"; 
 import { PassengerInfoPage } from "../pages/PassengerInfoPage";
 import { PaymentPage } from "../pages/PaymentPage";
+import { ENV } from "../config/env";
  
 test("Book Ticket", async ({page}) => {
  
@@ -11,10 +12,10 @@ test("Book Ticket", async ({page}) => {
   const PassengerInfo = new PassengerInfoPage(page);
   const PaymentModel = new PaymentPage(page);
  
-  await BusSearch.AbhiBusURL();
-  await BusSearch.fromInputField("Ahmedabad");
-  await BusSearch.toInputField("Mumbai");
-  await BusSearch.selectDate();
+  await BusSearch.AbhiBusURL(ENV.BASE_URL);
+  await BusSearch.fromInputField(ENV.BOARDING_CITY);
+  await BusSearch.toInputField(ENV.DESTINATION_CITY); 
+  await BusSearch.selectDate(ENV.DATE_OF_JOURNEY);
   await BusSearch.pressSearchButton();
 
   await page.waitForLoadState("load");
@@ -32,9 +33,7 @@ test("Book Ticket", async ({page}) => {
   await BusFilter.selectDroppingPoint();
 
   await PassengerInfo.ClosingLoginModel();
-  await PassengerInfo.FillingUserInfo("8200079192", "tradahenish94@gmail.com");
-
-  // await page.waitForLoadState("load");
+  await PassengerInfo.FillingUserInfo(ENV.PassengerDetail);
 
   await PaymentModel.selectingpaymentOption();
   await PaymentModel.GenerateQRCode();
