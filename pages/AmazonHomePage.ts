@@ -14,7 +14,7 @@ export class AmazonHomePage{
     }
 
     async amazonURL(){
-        await this.page.goto(ENV.BASE_URL);
+        await this.page.goto(ENV.AMAZON_BASE_URL);
     }
 
     async searchingProduct(productName : string): Promise<void>{

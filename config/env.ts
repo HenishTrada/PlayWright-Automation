@@ -18,11 +18,9 @@ import dotenv from 'dotenv';
 
 const env = process.env.TEST_ENV || "qa";
 
-if (!process.env.CI) {
-  dotenv.config({
-    path: `.env.${env}`,
-  });
-}
+dotenv.config({
+    path : `.env.${env}`
+})
 
 function required(key: string): string {
   const value = process.env[key];
@@ -35,6 +33,7 @@ function required(key: string): string {
 }
 
 export const ENV = {
-  BASE_URL: required("BASE_URL"),
+  AMAZON_BASE_URL: required("AMAZON_BASE_URL"),
+  CONNECTHQ_BASE_URL : required("CONNECTHQ_BASE_URL"),
   PRODUCT_NAME: required("PRODUCT_NAME"),
 };

@@ -1,3 +1,4 @@
+
 name: Playwright Tests
 
 on:
@@ -14,9 +15,10 @@ on:
           - stage
 
   push:
-    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration]
+    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
+
   pull_request:
-    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration]
+    branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
 
 jobs:
   test:
@@ -24,24 +26,16 @@ jobs:
 
     env:
       TEST_ENV: ${{ github.event.inputs.test_env || 'qa' }}
-      PRODUCT_NAME: ${{ vars.PRODUCT_NAME }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set BASE_URL by environment
+      - name: Verify env file exists
         run: |
-          if [ "${TEST_ENV}" = "dev" ]; then
-            echo "BASE_URL=${{ secrets.DEV_BASE_URL }}" >> $GITHUB_ENV
-          elif [ "${TEST_ENV}" = "qa" ]; then
-            echo "BASE_URL=${{ secrets.QA_BASE_URL }}" >> $GITHUB_ENV
-          elif [ "${TEST_ENV}" = "stage" ]; then
-            echo "BASE_URL=${{ secrets.STAGE_BASE_URL }}" >> $GITHUB_ENV
-          else
-            echo "Invalid TEST_ENV: ${TEST_ENV}"
-            exit 1
-          fi
+          echo "TEST_ENV=$TEST_ENV"
+          ls -la
+          test -f ".env.$TEST_ENV" || exit 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
