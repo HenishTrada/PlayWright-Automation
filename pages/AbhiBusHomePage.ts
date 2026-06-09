@@ -7,6 +7,7 @@ export class AbhiBusHomePage {
     fromInput: Locator;
     toInput: Locator;
     datePicker: Locator;
+    notFoundContainer : Locator;
  
     constructor(page: Page) {
  
@@ -15,6 +16,7 @@ export class AbhiBusHomePage {
         this.toInput = page.getByPlaceholder("Going To");
         this.searchButton = page.locator("#search-container").getByRole("button", { name: "Search" });
         this.datePicker = page.getByPlaceholder("Onward Journey Date");
+        this.notFoundContainer = page.locator('#not-found-container').getByRole('heading', { name: 'There are no services on this route for the selected date. Select bus services available on alternative dates for this route.' });
  
     }
  
@@ -47,6 +49,10 @@ export class AbhiBusHomePage {
  
     async pressSearchButton(){
         await this.searchButton.click();
+    }
+
+    async verifyNoServiceMessage(){
+        await expect(this.notFoundContainer).toBeVisible();
     }
  
 }

@@ -10,14 +10,12 @@ export class PaymentPage{
     QrImage : Locator;
 
     constructor( page : Page ){
-
         this.page = page;
         this.Heading = page.getByRole('heading', { name: 'Fare Summary', level: 4 });
         this.MainTab = page.locator('#main-tabs');
         this.UPITab = this.MainTab.locator("#UPI");
         this.QRButton = page.getByRole('button', {name : "Generate QR"});
         this.QrImage = page.locator('.relative.rounded-10.shadow-100');
-
     }
 
     async selectingpaymentOption(){
@@ -30,7 +28,6 @@ export class PaymentPage{
     async GenerateQRCode(){
         await expect(this.QrImage.locator("img")).toHaveAttribute("class", /blur-sm/);
         await this.QRButton.click();
-
         await this.QrImage.locator("svg").waitFor({state : "visible"});
         await expect(this.QrImage.locator("svg")).toBeVisible();
     }

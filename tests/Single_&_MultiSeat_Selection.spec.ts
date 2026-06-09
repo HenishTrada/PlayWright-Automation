@@ -5,6 +5,7 @@ import { PassengerInfoPage } from "../pages/PassengerInfoPage";
 import { PaymentPage } from "../pages/PaymentPage";
 import { ENV } from "../config/env";
 import testData from "../test-data/testFile.json"
+import { PriceFilterPage } from "../pages/PriceRangeSlider";
 
 //Grouping using ".describe" to execute the independent testcases parallel using 
 test.describe("Bus Booking Flow", () => {
@@ -28,11 +29,12 @@ test.describe("Bus Booking Flow", () => {
     await BusSearch.pressSearchButton();
   });
   
-  test("Singel seat selection", async ({page}) => {
+  test("Singel seat selection @regression", async ({page}) => {
   
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);
     const PaymentModel = new PaymentPage(page);
+    const PriceRangeSlider = new PriceFilterPage(page);
 
     await page.waitForLoadState("load");
   
@@ -43,6 +45,7 @@ test.describe("Bus Booking Flow", () => {
     await BusFilter.selectingDroppingCity();
     await BusFilter.busFilter();
     await page.waitForTimeout(2000);
+    // await PriceRangeSlider.setPriceRange(500, 2000);
     
     await BusFilter.selectBusSeat(1);
     await BusFilter.selectBoardingPoint();
@@ -56,6 +59,7 @@ test.describe("Bus Booking Flow", () => {
   });
 
   test("Multiple Seat selection", async ({ page }) => {
+
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);
     const PaymentModel = new PaymentPage(page);
@@ -84,4 +88,5 @@ test.describe("Bus Booking Flow", () => {
     await PaymentModel.selectingpaymentOption();
     await PaymentModel.GenerateQRCode();
   });
+
 })

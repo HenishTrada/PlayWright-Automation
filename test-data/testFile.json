@@ -2,7 +2,12 @@
     "Journey_Detail": {
         "BOARDING_CITY": "Ahmedabad",
         "DESTINATION_CITY": "Mumbai",
-        "DATE_OF_JOURNEY": "11"
+        "DATE_OF_JOURNEY": "12"
+    },
+    "Invalid_Journey_Detail" : {
+        "BOARDING_CITY": "Ahmedabad",
+        "DESTINATION_CITY": "Umrali",
+        "DATE_OF_JOURNEY": "25"
     },
     "BOOKING_DETAILS": {
         "contactDetails": {

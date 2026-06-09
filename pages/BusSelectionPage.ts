@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test"
+import { PriceFilterPage } from "./PriceRangeSlider";
 
 export class BusSelectionPage {
 
