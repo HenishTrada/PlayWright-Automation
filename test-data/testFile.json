@@ -1,0 +1,25 @@
+{
+    "Journey_Detail": {
+        "BOARDING_CITY": "Ahmedabad",
+        "DESTINATION_CITY": "Mumbai",
+        "DATE_OF_JOURNEY": "11"
+    },
+    "BOOKING_DETAILS": {
+        "contactDetails": {
+            "mobileNumber": "8200079192",
+            "emailId": "tradahenish94@gmail.com"
+        },
+        "passengers": [
+            {
+                "name": "Henish Trada",
+                "age": "21",
+                "gender": "Male"
+            },
+            {
+                "name": "Rahul Shah",
+                "age": "22",
+                "gender": "Male"
+            }
+        ]
+    }
+}

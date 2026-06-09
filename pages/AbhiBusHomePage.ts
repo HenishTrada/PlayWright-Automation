@@ -20,15 +20,9 @@ export class AbhiBusHomePage {
  
     async AbhiBusURL(): Promise<void> {
         await this.page.goto(ENV.BASE_URL);
-
-
-        console.log("Current URL:", this.page.url());
-
+        // console.log("Current URL:", this.page.url());
         await expect(this.page).toHaveURL(/abhibus/);
-
-        await expect(this.fromInput).toBeVisible({
-            timeout: 30000,
-        });
+        await expect(this.fromInput).toBeVisible({timeout: 30000});
     }
  
     async fromInputField(leavingCityName: string): Promise<void>{
@@ -36,7 +30,6 @@ export class AbhiBusHomePage {
         await this.fromInput.fill(leavingCityName);
         await this.page.getByText(leavingCityName, { exact: true }).first().click();
         await expect(this.fromInput).toHaveValue(leavingCityName);
- 
     }
  
     async toInputField(destinationCityName: string): Promise<void> {

@@ -4,38 +4,35 @@ import { BusSelectionPage } from "../pages/BusSelectionPage";
 import { PassengerInfoPage } from "../pages/PassengerInfoPage";
 import { PaymentPage } from "../pages/PaymentPage";
 import { ENV } from "../config/env";
-
-
+import testData from "../test-data/testFile.json"
 
 //Grouping using ".describe" to execute the independent testcases parallel using 
-test.describe("Booking Flow", () => {
+test.describe("Bus Booking Flow", () => {
+
+  test.beforeAll(async ({}, workerInfo) => {
+    console.log("beforeAll");
+    console.log("worker:", workerInfo.workerIndex);
+    console.log("Workers are assign for the test execution.")
+  });
 
   let BusSearch: AbhiBusHomePage;
-
-  //beforeEach hook that execute before all the tests starts executing
+  //beforeEach hook that execute before every test starts executing
   test.beforeEach(async ({ page }) => {
 
     BusSearch = new AbhiBusHomePage(page);
 
     await BusSearch.AbhiBusURL();
-    await BusSearch.fromInputField(ENV.BOARDING_CITY);
-    await BusSearch.toInputField(ENV.DESTINATION_CITY);
-    await BusSearch.selectDate(ENV.DATE_OF_JOURNEY);
+    await BusSearch.fromInputField(testData.Journey_Detail.BOARDING_CITY);
+    await BusSearch.toInputField(testData.Journey_Detail.DESTINATION_CITY);
+    await BusSearch.selectDate(testData.Journey_Detail.DATE_OF_JOURNEY);
     await BusSearch.pressSearchButton();
   });
   
-  test.only("Singel seat selection", async ({page}) => {
+  test("Singel seat selection", async ({page}) => {
   
-    // const BusSearch = new AbhiBusHomePage(page);
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);
     const PaymentModel = new PaymentPage(page);
-  
-    // await BusSearch.AbhiBusURL();
-    // await BusSearch.fromInputField(ENV.BOARDING_CITY);
-    // await BusSearch.toInputField(ENV.DESTINATION_CITY); 
-    // await BusSearch.selectDate(ENV.DATE_OF_JOURNEY);
-    // await BusSearch.pressSearchButton();
 
     await page.waitForLoadState("load");
   
@@ -52,25 +49,16 @@ test.describe("Booking Flow", () => {
     await BusFilter.selectDroppingPoint();
 
     await PassengerInfo.ClosingLoginModel();
-    await PassengerInfo.FillingUserInfo(ENV.BOOKING_DETAILS.contactDetails, ENV.BOOKING_DETAILS.passengers);
+    await PassengerInfo.FillingUserInfo(testData.BOOKING_DETAILS.contactDetails, testData.BOOKING_DETAILS.passengers);
 
     await PaymentModel.selectingpaymentOption();
     await PaymentModel.GenerateQRCode();
-
-    
   });
 
-  test("Multiple Seat selection", async ({ page }) => {
-    // const BusSearch = new AbhiBusHomePage(page);
+  test.only("Multiple Seat selection", async ({ page }) => {
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);
     const PaymentModel = new PaymentPage(page);
-  
-    // await BusSearch.AbhiBusURL();
-    // await BusSearch.fromInputField(ENV.BOARDING_CITY);
-    // await BusSearch.toInputField(ENV.DESTINATION_CITY); 
-    // await BusSearch.selectDate(ENV.DATE_OF_JOURNEY);
-    // await BusSearch.pressSearchButton();
 
     await page.waitForLoadState("load");
   
@@ -91,11 +79,9 @@ test.describe("Booking Flow", () => {
     await PassengerInfo.ClosingLoginModel();
     await PassengerInfo.FillingUserInfo(ENV.BOOKING_DETAILS.contactDetails, ENV.BOOKING_DETAILS.passengers);
 
-    await page.waitForLoadState("load");
+    await page.waitForLoadState("domcontentloaded");
 
     await PaymentModel.selectingpaymentOption();
     await PaymentModel.GenerateQRCode();
-
-    
   });
 })
