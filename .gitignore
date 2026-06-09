@@ -4,7 +4,6 @@
 node_modules/
 # .gitignore
 codegenenhance.spec.ts
-node_modules/
 locators.spec.ts
 # =========================
 # Build / Output
