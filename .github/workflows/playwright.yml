@@ -12,8 +12,17 @@ on:
           - dev
           - qa
           - stage
+      testType:                    # ← same indent level as test_env
+        description: "Select Test Suite"
+        required: true
+        type: choice
+        default: "all"
+        options:
+          - smoke
+          - regression
+          - all
 
-  push:
+  push:                            # ← same indent level as workflow_dispatch
     branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
   pull_request:
     branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
@@ -21,29 +30,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.test_env || 'qa' }}   # ← don't forget this
 
     env:
       TEST_ENV: ${{ github.event.inputs.test_env || 'qa' }}
       PRODUCT_NAME: ${{ vars.PRODUCT_NAME }}
-      AMAZON_BASE_URL: ${{ secrets.AMAZON_BASE_URL }} 
+      AMAZON_BASE_URL: ${{ secrets.AMAZON_BASE_URL }}
       CONNECTHQ_BASE_URL: ${{ secrets.CONNECTHQ_BASE_URL }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set BASE_URL by environment
-        run: |
-          if [ "${TEST_ENV}" = "dev" ]; then
-            echo "BASE_URL=${{ secrets.DEV_BASE_URL }}" >> $GITHUB_ENV
-          elif [ "${TEST_ENV}" = "qa" ]; then
-            echo "BASE_URL=${{ secrets.QA_BASE_URL }}" >> $GITHUB_ENV
-          elif [ "${TEST_ENV}" = "stage" ]; then
-            echo "BASE_URL=${{ secrets.STAGE_BASE_URL }}" >> $GITHUB_ENV
-          else
-            echo "Invalid TEST_ENV: ${TEST_ENV}"
-            exit 1
-          fi
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -57,7 +55,14 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: TEST_ENV=${{ github.event.inputs.environment }} npx playwright test
+        run: |
+          if [ "${{ github.event.inputs.testType || 'all' }}" = "smoke" ]; then
+            npx playwright test --grep "@smoke"
+          elif [ "${{ github.event.inputs.testType || 'all' }}" = "regression" ]; then
+            npx playwright test --grep "@regression"
+          else
+            npx playwright test
+          fi
 
       - name: Upload Playwright HTML report
         if: always()
