@@ -26,7 +26,7 @@ jobs:
       TEST_ENV: ${{ github.event.inputs.test_env || 'qa' }}
       PRODUCT_NAME: ${{ vars.PRODUCT_NAME }}
       AMAZON_BASE_URL: ${{ secrets.AMAZON_BASE_URL }} 
-      CONNECTHQ_BASE_URL: ${{ env.BASE_URL }}
+      CONNECTHQ_BASE_URL: ${{ secrets.CONNECTHQ_BASE_URL }}
 
     steps:
       - name: Checkout repository
