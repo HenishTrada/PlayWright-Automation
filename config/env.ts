@@ -18,9 +18,11 @@ import dotenv from 'dotenv';
 
 const env = process.env.TEST_ENV || "qa";
 
-dotenv.config({
-    path : `.env.${env}`
-})
+if (!process.env.CI) {
+    dotenv.config({
+        path: `.env.${env}`
+    });
+}
 
 function required(key: string): string {
   const value = process.env[key];
