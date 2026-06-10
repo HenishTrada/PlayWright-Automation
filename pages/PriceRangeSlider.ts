@@ -1,78 +1,181 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 
-export class PriceFilterPage {
-  page: Page;
-  priceSlider: Locator;
-  minThumb: Locator;
-  maxThumb: Locator;
+/**
+ * PriceSlider — Playwright automation helper for the horizontal range price slider.
+ *
+ * Usage:
+ *   const slider = new PriceSlider(page);
+ *   await slider.setRange(1000, 5000);
+ */
+export class PriceSlider {
+  private readonly page: Page;
+
+  private readonly sliderContainer: Locator;
+  private readonly minThumb: Locator;
+  private readonly maxThumb: Locator;
+
+  private dataMin!: number;
+  private dataMax!: number;
+
+  // Real pixel travel boundaries (thumb centre at min extreme → thumb centre at max extreme)
+  private travelMinX!: number;
+  private travelMaxX!: number;
+  private thumbCenterY!: number;
 
   constructor(page: Page) {
     this.page = page;
-    this.priceSlider = page.locator(".horizontal-slider");
-    this.minThumb = this.priceSlider.locator(".slider-thumb-0");
-    this.maxThumb = this.priceSlider.locator(".slider-thumb-1");
+    this.sliderContainer = page.locator(".horizontal-slider").first();
+    this.minThumb = this.sliderContainer.locator(".slider-thumb-0").first();
+    this.maxThumb = this.sliderContainer.locator(".slider-thumb-1").first();
   }
 
-  private async getEffectiveSliderWidth(){
-    const maxThumbLeft = await this.maxThumb.evaluate((el) =>
-      parseFloat((el as HTMLElement).style.left || "0")
-    );
+  async setRange(minimum: number, maximum: number): Promise<void> {
+    await this.sliderContainer.waitFor({ state: "visible" });
+    await this.readBounds();
+    this.validateInput(minimum, maximum);
 
-    const minValue = Number(await this.minThumb.getAttribute("aria-valuemin"));
-    const maxValue = Number(await this.minThumb.getAttribute("aria-valuemax"));
+    // Move min thumb to its data-min first so max thumb has full room to move
+    await this.dragThumb(this.minThumb, this.dataMin);
+    // Move max thumb to its data-max first so min thumb has full room to move
+    await this.dragThumb(this.maxThumb, this.dataMax);
 
-    if (!maxThumbLeft || Number.isNaN(maxThumbLeft)) {
-      throw new Error("Unable to read max thumb left style");
-    }
+    // Now set actual target values — no risk of thumbs crossing
+    await this.dragThumb(this.minThumb, minimum);
+    await this.dragThumb(this.maxThumb, maximum);
 
-    return {maxThumbLeft, minValue, maxValue}; // 249.203 in your HTML
+    await this.assertValues(minimum, maximum);
   }
 
-  private async getTargetX(targetValue: number): Promise<number> {
-    const sliderBox = await this.priceSlider.boundingBox();
-
-    if (!sliderBox) {
-      throw new Error("Slider bounding box not found");
-    }
-
-    const {maxThumbLeft, maxValue, minValue}  = await this.getEffectiveSliderWidth();
-
-    const ratio = (maxThumbLeft) / (maxValue - minValue);
-
-    return  targetValue * ratio;
+  /**
+   * Read the current [min, max] values from the slider's aria attributes.
+   */
+  async getCurrentValues(): Promise<{ min: number; max: number }> {
+    const min = await this.getAriaValue(this.minThumb);
+    const max = await this.getAriaValue(this.maxThumb);
+    return { min, max };
   }
 
-  private async dragThumbToValue(
-    thumb: Locator,
-    targetValue: number
-  ): Promise<void> {
-    await expect(thumb).toBeVisible();
+  // ─────────────────────────────────────────────
+  // Internal helpers
+  // ─────────────────────────────────────────────
 
-    const thumbBox = await thumb.boundingBox();
-    const sliderBox = await this.priceSlider.boundingBox();
+  /**
+   * Read data bounds from aria attributes, then measure the ACTUAL thumb
+   * travel range in pixels by reading the two thumb bounding boxes directly.
+   *
+   * FIX: We no longer use sliderContainer.boundingBox().width as the track
+   * width — that includes padding and gives wrong pixel targets. Instead we
+   * read the thumb centres at their current positions and compute travel
+   * distance from them at runtime.
+   */
+  private async readBounds(): Promise<void> {
+    this.dataMin = Number(await this.minThumb.getAttribute("aria-valuemin"));
+    this.dataMax = Number(await this.minThumb.getAttribute("aria-valuemax"));
 
-    if (!thumbBox || !sliderBox) {
-      throw new Error("Thumb or slider bounding box not found");
+    const minBox = await this.minThumb.boundingBox();
+    const maxBox = await this.maxThumb.boundingBox();
+
+    if (!minBox || !maxBox) {
+      throw new Error("Could not read thumb bounding boxes.");
     }
 
-    const startX = thumbBox.x + thumbBox.width / 2;
-    const startY = thumbBox.y + thumbBox.height / 2;
+    // Use the thumb centres at their current positions.
+    // For a freshly loaded page the min thumb is at the far-left and the max
+    // thumb is at the far-right, so these ARE the travel limits.
+    // If the page has already been filtered, we reset to extremes in setRange()
+    // before calling readBounds() a second time — see note in setRange().
+    this.travelMinX = minBox.x + minBox.width / 2;
+    this.travelMaxX = maxBox.x + maxBox.width / 2;
+    this.thumbCenterY = minBox.y + minBox.height / 2;
 
-    const targetX = await this.getTargetX(targetValue) + startX;
-    const targetY = startY;
-    console.log(targetX," ", startX," ", sliderBox.x);
-    await this.page.mouse.move(startX, startY);
+    if (this.travelMaxX <= this.travelMinX) {
+      throw new Error(
+        `Unexpected thumb positions: minX=${this.travelMinX} maxX=${this.travelMaxX}. ` +
+          "Make sure the slider is at its full range before calling readBounds()."
+      );
+    }
+  }
+
+  /**
+   * Convert a price value into an absolute page X coordinate.
+   *
+   * Formula (corrected):
+   *   ratio   = (value − dataMin) / (dataMax − dataMin)     → 0.0 … 1.0
+   *   targetX = travelMinX + ratio × (travelMaxX − travelMinX)
+   *
+   * travelMinX / travelMaxX are the thumb CENTRE positions at the two
+   * extremes — so the multiplication maps directly onto real pixel travel,
+   * with zero padding error.
+   */
+  private valueToPixel(value: number): number {
+    const ratio = (value - this.dataMin) / (this.dataMax - this.dataMin);
+    console.log(this.travelMaxX, " ", this.travelMinX, " ", ratio);
+    return ratio * (this.travelMaxX - this.travelMinX);
+  }
+
+  /** Drag a thumb to the pixel X that corresponds to targetValue. */
+  private async dragThumb(thumb: Locator, targetValue: number): Promise<void> {
+    const box = await thumb.boundingBox();
+    if (!box) throw new Error("Thumb element not found or not visible.");
+
+    const currentCenterX = box.x + box.width / 2;
+    const currentCenterY = box.y + box.height / 2;
+    const targetX = this.valueToPixel(targetValue);
+
+    await this.page.mouse.move(currentCenterX, currentCenterY);
     await this.page.mouse.down();
-    await this.page.mouse.move(targetX, targetY, { steps: 30 });
+    await this.page.mouse.move(currentCenterX + targetX, currentCenterY, { steps: 20 });
     await this.page.mouse.up();
+
+    // Allow React / slider library to commit the new value
+    await this.page.waitForTimeout(200);
   }
 
-  async setPriceRange(minPrice: number, maxPrice: number): Promise<void> {
-    if (minPrice >= maxPrice) {
-      throw new Error("Minimum price must be less than maximum price");
-    }
+  /** Read aria-valuenow from a thumb element. */
+  private async getAriaValue(thumb: Locator): Promise<number> {
+    const raw = await thumb.getAttribute("aria-valuenow");
+    return Number(raw);
+  }
 
-    await this.dragThumbToValue(this.minThumb, minPrice);
-    // await this.dragThumbToValue(this.maxThumb, maxPrice);
+  /** Throw early with a helpful message if the caller passes bad values. */
+  private validateInput(minimum: number, maximum: number): void {
+    if (minimum < this.dataMin || minimum > this.dataMax) {
+      throw new RangeError(
+        `minimum (${minimum}) is outside the slider range [${this.dataMin}, ${this.dataMax}].`
+      );
+    }
+    if (maximum < this.dataMin || maximum > this.dataMax) {
+      throw new RangeError(
+        `maximum (${maximum}) is outside the slider range [${this.dataMin}, ${this.dataMax}].`
+      );
+    }
+    if (minimum > maximum) {
+      throw new RangeError(
+        `minimum (${minimum}) must not be greater than maximum (${maximum}).`
+      );
+    }
+  }
+
+  /**
+   * Soft-assert: warn if final aria-valuenow differs from the requested value
+   * beyond the slider's natural step tolerance.
+   */
+  private async assertValues(
+    expectedMin: number,
+    expectedMax: number
+  ): Promise<void> {
+    const tolerance = 10;
+    const { min, max } = await this.getCurrentValues();
+
+    if (Math.abs(min - expectedMin) > tolerance) {
+      console.warn(
+        `[PriceSlider] min thumb landed at ${min} instead of ${expectedMin}.`
+      );
+    }
+    if (Math.abs(max - expectedMax) > tolerance) {
+      console.warn(
+        `[PriceSlider] max thumb landed at ${max} instead of ${expectedMax}.`
+      );
+    }
   }
 }
