@@ -58,7 +58,7 @@ test.describe("Bus Booking Flow", () => {
     await PaymentModel.GenerateQRCode();
   });
 
-  test("Multiple Seat selection", async ({ page }) => {
+  test("Multiple Seat selection", {tag : "@smoke"}, async ({ page }) => {
 
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);

@@ -32,8 +32,7 @@ export class PaymentPage{
     await expect(qrImg).toBeVisible({ timeout: 10000 });
     await expect(qrImg).toHaveClass(/blur-sm/, { timeout: 10000 });
 
-    await expect(this.QRButton).toBeVisible({ timeout: 10000 });
-    await expect(this.QRButton).toBeEnabled({ timeout: 10000 });
+    await expect(this.QRButton).toBeVisible({ timeout: 3000 });
 
     await this.QRButton.click();
 

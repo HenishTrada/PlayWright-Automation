@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from "@playwright/test"
-import { PriceFilterPage } from "./PriceRangeSlider";
 
 export class BusSelectionPage {
 
@@ -117,7 +116,7 @@ export class BusSelectionPage {
         await this.BoardingAndDroppingList.scrollIntoViewIfNeeded();
         await droppingLocation.click();
 
-        await this.page.waitForTimeout(2000);
+        // await this.page.waitForTimeout(2000);
 
         await this.ProceedButton.waitFor({ state: "visible" });
         await this.ProceedButton.click();

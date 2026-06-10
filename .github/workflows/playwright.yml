@@ -12,6 +12,15 @@ on:
           - dev
           - qa
           - stage
+      testType:                    
+        description: "Select Test Suite"
+        required: true
+        type: choice
+        default: "all"
+        options:
+          - smoke
+          - regression
+          - all
 
   push:
     branches: [main, master, Day06-POM_Architecture, Day07-Environment_Configuration, Final_Assignment]
@@ -49,7 +58,14 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: |
+          if [ "${{ github.event.inputs.testType || 'all' }}" = "smoke" ]; then
+            npx playwright test --grep "@smoke"
+          elif [ "${{ github.event.inputs.testType || 'all' }}" = "regression" ]; then
+            npx playwright test --grep "@regression"
+          else
+            npx playwright test
+          fi
 
       - name: Upload Playwright HTML report
         if: always()
