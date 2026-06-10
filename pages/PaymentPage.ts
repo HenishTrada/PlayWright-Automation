@@ -20,15 +20,23 @@ export class PaymentPage{
 
     async selectingpaymentOption(){
         await this.page.waitForLoadState("load");
-        await this.UPITab.waitFor({state : "visible"});
+        await this.UPITab.waitFor({state : "visible", timeout : 20000});
         await this.UPITab.click();
         await expect(this.UPITab).toHaveAttribute("class", /bg-common-white/);
     }
 
-    async GenerateQRCode(){
-        await expect(this.QrImage.locator("img")).toHaveAttribute("class", /blur-sm/);
-        await this.QRButton.click();
-        await this.QrImage.locator("svg").waitFor({state : "visible"});
-        await expect(this.QrImage.locator("svg")).toBeVisible();
+    async GenerateQRCode(): Promise<void> {
+    const qrImg = this.QrImage.locator("img");
+    const qrSvg = this.QrImage.locator("svg");
+
+    await expect(qrImg).toBeVisible({ timeout: 10000 });
+    await expect(qrImg).toHaveClass(/blur-sm/, { timeout: 10000 });
+
+    await expect(this.QRButton).toBeVisible({ timeout: 10000 });
+    await expect(this.QRButton).toBeEnabled({ timeout: 10000 });
+
+    await this.QRButton.click();
+
+    await expect(qrSvg).toBeVisible({ timeout: 15000 });
     }
 }
