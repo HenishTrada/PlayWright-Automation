@@ -34,6 +34,11 @@ jobs:
 
     env:
       TEST_ENV: ${{ github.event.inputs.test_env || 'qa' }}
+      BASE_URL: ${{ secrets.BASE_URL }}
+      BOOKING_DETAILS: ${{ secrets.BOOKING_DETAILS }}
+      BOARDING_CITY: ${{ vars.BOARDING_CITY }}
+      DESTINATION_CITY: ${{ vars.DESTINATION_CITY }}
+      DATE_OF_JOURNEY: ${{ vars.DATE_OF_JOURNEY }}
 
     steps:
       - name: Checkout repository

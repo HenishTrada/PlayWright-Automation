@@ -70,20 +70,9 @@ export class PassengerInfoPage{
 
             await passengerForm_i.getByRole('button', { name: 'Male', exact : true }).click();
         }
-
-        // await this.Name.click();
-        // await this.Name.pressSequentially(passengerDetail.name);
-
-        // await this.Age.click();
-        // await this.Age.pressSequentially(passengerDetail.age);
-
-        // await this.Gender.click();
-
         await this.TravelAssured.check()
         await expect(this.TravelAssured).toBeChecked();
         await this.ContinueLink.click();
-
     }
-
 
 }
