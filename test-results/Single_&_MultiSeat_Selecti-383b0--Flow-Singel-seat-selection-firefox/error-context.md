@@ -1,0 +1,927 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Single_&_MultiSeat_Selection.spec.ts >> Bus Booking Flow >> Singel seat selection
+- Location: tests/Single_&_MultiSeat_Selection.spec.ts:32:7
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded while running "beforeEach" hook.
+```
+
+```
+Error: page.goto: Test timeout of 30000ms exceeded.
+Call log:
+  - navigating to "https://www.abhibus.com/", waiting until "load"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e5]:
+        - link "abhibus.com" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img [ref=e7]
+          - img [ref=e11]
+      - navigation [ref=e21]:
+        - generic [ref=e22] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e26]: Offers
+        - generic [ref=e27] [cursor=pointer]:
+          - img [ref=e29]
+          - generic [ref=e32]: Track Ticket
+        - generic [ref=e33] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e38]: Need Help?
+        - generic [ref=e39] [cursor=pointer]:
+          - img [ref=e41]
+          - generic [ref=e43]: Login/SignUp
+  - generic [ref=e46]:
+    - generic [ref=e48]:
+      - navigation [ref=e50]:
+        - link "Buses" [ref=e51] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e53]: Buses
+        - link "Flights" [ref=e54] [cursor=pointer]:
+          - /url: https://www.ixigo.com/flights?utm_source=abhibus&utm_medium=abhiwebf
+          - generic [ref=e56]: Flights
+        - link "Trains" [ref=e57] [cursor=pointer]:
+          - /url: /redirect_booking/trainsbooking
+          - generic [ref=e59]: Trains
+        - link "Hotels" [ref=e60] [cursor=pointer]:
+          - /url: https://www.ixigo.com/hotels?utm_source=abhibus&utm_medium=abhiwebh
+          - generic [ref=e62]: Hotels
+      - heading "India’s Fastest Bus Ticket Booking Platform" [level=1] [ref=e64]
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - generic [ref=e71]:
+          - img [ref=e73]
+          - textbox "Leaving From" [ref=e76]
+        - img [ref=e78] [cursor=pointer]
+      - generic [ref=e84]:
+        - img [ref=e86]
+        - textbox "Going To" [ref=e90]
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - heading "Departure" [level=3] [ref=e96]
+          - img [ref=e97]
+        - textbox "Onward Journey Date" [ref=e100]: 10/06/2026
+        - generic [ref=e101]:
+          - button "Today" [ref=e102] [cursor=pointer]
+          - button "Tomorrow" [ref=e103] [cursor=pointer]
+      - button "Search" [ref=e105] [cursor=pointer]:
+        - img [ref=e107]
+        - generic [ref=e109]: Search
+  - main [ref=e110]:
+    - generic [ref=e112]:
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - heading "Bus Booking Discount Offers" [level=2] [ref=e117]
+          - link "View All" [ref=e119] [cursor=pointer]:
+            - /url: /bus-ticket-offers
+            - img [ref=e121]
+            - generic [ref=e123]: View All
+        - generic [ref=e124]:
+          - generic [ref=e126]:
+            - img "Get ₹500 Off on your 1st Booking" [ref=e128] [cursor=pointer]
+            - img "Get up to Rs.300 off with RBL Bank Credit Card" [ref=e130] [cursor=pointer]
+            - img "Get 10% up to Rs.200 off with AU Bank Credit Card" [ref=e132] [cursor=pointer]
+            - img "Get 10% up to Rs.200 off with Visa Credit Card" [ref=e134] [cursor=pointer]
+            - img "Get 10% OFF Up to ₹200 with Visa Debit Cards" [ref=e136] [cursor=pointer]
+            - img "Get 10% OFF* with MobiKwik UPI" [ref=e138] [cursor=pointer]
+            - img "Get 10% OFF* on Intrcity SmartBus" [ref=e140] [cursor=pointer]
+            - img "Get 10% OFF* on Nuego Bus bookings" [ref=e142] [cursor=pointer]
+            - img "Get 15% OFF on Flix Bus" [ref=e144] [cursor=pointer]
+            - img "Get 15% OFF on Leafy Bus Bookings" [ref=e146] [cursor=pointer]
+            - img "Save upto Rs.300 on APSRTC bookings" [ref=e148] [cursor=pointer]
+            - img "Save upto Rs.300 on TGSRTC bookings" [ref=e150] [cursor=pointer]
+            - img "Save upto Rs.300 on Kerala RTC bookings" [ref=e152] [cursor=pointer]
+            - img "Get Rs. 100 OFF with SBM ZET Credit Card" [ref=e154] [cursor=pointer]
+            - img "Get Rs. 200 OFF with SBI Credit Card" [ref=e156] [cursor=pointer]
+            - img "Save upto Rs.300 on UTC300 bookings" [ref=e158] [cursor=pointer]
+            - img "Get 10% OFF on GSRTC bookings" [ref=e160] [cursor=pointer]
+            - img "Get 20% OFF on OSRTC bookings" [ref=e162] [cursor=pointer]
+            - img "Get Up to ₹100 Cashback on Bus Bookings" [ref=e164] [cursor=pointer]
+            - img "Save upto Rs.500 on UPSRTC bookings" [ref=e166] [cursor=pointer]
+            - img "Get up to ₹50 instant cashback with BHIM App" [ref=e168] [cursor=pointer]
+            - img "15% off up to ₹250 on booking with Tide Card" [ref=e170] [cursor=pointer]
+            - img "Flat 10% off via ixigo - AU Bank Credit Card" [ref=e172] [cursor=pointer]
+            - img "Save upto Rs.500 on HRTC Bookings" [ref=e174] [cursor=pointer]
+            - img "Book & Get A Zomato Gold Membership" [ref=e176] [cursor=pointer]
+            - img "Free 45-day subscription access to Pocket FM Premium" [ref=e178] [cursor=pointer]
+            - img "50% off on RSRTC bookings" [ref=e180] [cursor=pointer]
+          - button "offers-slide-right" [ref=e181] [cursor=pointer]:
+            - img [ref=e182]
+      - generic [ref=e184]:
+        - generic [ref=e185]:
+          - heading "Why Choose AbhiBus for Bus Ticket Booking?" [level=2] [ref=e186]
+          - paragraph [ref=e187]: Experience the next generation of travel with India's 4.8-star rated online bus ticket booking site. Trusted by millions across 6,50,000+ routes, AbhiBus combines a massive network of 6,200+ partners with industry-leading innovation. From our AI-powered 'New Bus' filter and 360° virtual tours to rigorous safety checks, we ensure every journey is smart, transparent, and built for your comfort and safety.
+        - generic [ref=e189]:
+          - generic [ref=e191]:
+            - img "HomeRoute" [ref=e193]
+            - generic [ref=e194]:
+              - heading "6,50,000+ Bus Routes" [level=3] [ref=e195]
+              - paragraph [ref=e196]: offering unparalleled choices for your travel needs
+          - generic [ref=e198]:
+            - img "HomeBus" [ref=e200]
+            - generic [ref=e201]:
+              - heading "6200+ Bus Partners" [level=3] [ref=e202]
+              - paragraph [ref=e203]: ranging from State RTCs to private partners
+          - generic [ref=e205]:
+            - img "HomeTicket" [ref=e207]
+            - generic [ref=e208]:
+              - heading "Fastest Bus Booking" [level=3] [ref=e209]
+              - paragraph [ref=e210]: swift and seamless bus ticket booking experience
+          - generic [ref=e212]:
+            - img "HomeSupport" [ref=e214]
+            - generic [ref=e215]:
+              - heading "24/7 Customer Support" [level=3] [ref=e216]
+              - paragraph [ref=e217]: available for all your bus booking needs
+          - generic [ref=e219]:
+            - img "InstantRefunds" [ref=e221]
+            - generic [ref=e222]:
+              - heading "Instant Refunds" [level=3] [ref=e223]
+              - paragraph [ref=e224]: with free cancellation when changing or cancelling booking
+          - generic [ref=e226]:
+            - img "BestDeals" [ref=e228]
+            - generic [ref=e229]:
+              - heading "100k+ Buses with Discounts" [level=3] [ref=e230]
+              - paragraph [ref=e231]: Unlock best value with premium deals & exclusive discounts
+          - button "offers-slide-right" [ref=e232] [cursor=pointer]:
+            - img [ref=e233]
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - heading "Book Bus Tickets at AbhiBus" [level=2] [ref=e238]
+          - link "View All SRTCs" [ref=e240] [cursor=pointer]:
+            - /url: https://www.abhibus.com/srtc-directory/
+        - paragraph [ref=e242]: From SRTC (State Road Transport Corporation)
+        - generic [ref=e244]:
+          - generic [ref=e245]:
+            - img "APSRTC" [ref=e247]
+            - img "APSRTC" [ref=e251]
+            - generic [ref=e252]:
+              - generic [ref=e253]:
+                - heading "APSRTC" [level=3] [ref=e254]:
+                  - link "APSRTC" [ref=e255] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/919/APSRTC
+                - paragraph [ref=e256]: Andhra Pradesh State Road Transport Corporation
+              - link "Book Now" [ref=e259] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/919/APSRTC
+          - generic [ref=e260]:
+            - img "TGSRTC" [ref=e262]
+            - img "TGSRTC" [ref=e266]
+            - generic [ref=e267]:
+              - generic [ref=e268]:
+                - heading "TGSRTC" [level=3] [ref=e269]:
+                  - link "TGSRTC" [ref=e270] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/923/TSRTC
+                - paragraph [ref=e271]: Telangana State Road Transport Corporation
+              - link "Book Now" [ref=e274] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/923/TSRTC
+          - generic [ref=e275]:
+            - img "KSRTC" [ref=e277]
+            - img "KSRTC" [ref=e281]
+            - generic [ref=e282]:
+              - generic [ref=e283]:
+                - heading "KSRTC" [level=3] [ref=e284]:
+                  - link "KSRTC" [ref=e285] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1476/KSRTC
+                - paragraph [ref=e286]: Karnataka State Road Transport Corporation
+              - link "Book Now" [ref=e289] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1476/KSRTC
+          - generic [ref=e290]:
+            - img "Kerala RTC" [ref=e292]
+            - img "Kerala RTC" [ref=e296]
+            - generic [ref=e297]:
+              - generic [ref=e298]:
+                - heading "Kerala RTC" [level=3] [ref=e299]:
+                  - link "Kerala RTC" [ref=e300] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1486/Kerala-RTC
+                - paragraph [ref=e301]: Kerala Road Transport Corporation
+              - link "Book Now" [ref=e304] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1486/Kerala-RTC
+          - generic [ref=e305]:
+            - img "GSRTC" [ref=e307]
+            - img "GSRTC" [ref=e311]
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - heading "GSRTC" [level=3] [ref=e314]:
+                  - link "GSRTC" [ref=e315] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/781/GSRTC
+                - paragraph [ref=e316]: Gujarat State Road Transport Corporation
+              - link "Book Now" [ref=e319] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/781/GSRTC
+          - generic [ref=e320]:
+            - img "RSRTC" [ref=e322]
+            - img "RSRTC" [ref=e326]
+            - generic [ref=e327]:
+              - generic [ref=e328]:
+                - heading "RSRTC" [level=3] [ref=e329]:
+                  - link "RSRTC" [ref=e330] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/778/RSRTC
+                - paragraph [ref=e331]: Rajasthan State Road Transport Corporation
+              - link "Book Now" [ref=e334] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/778/RSRTC
+          - generic [ref=e335]:
+            - img "UPSRTC" [ref=e337]
+            - img "UPSRTC" [ref=e341]
+            - generic [ref=e342]:
+              - generic [ref=e343]:
+                - heading "UPSRTC" [level=3] [ref=e344]:
+                  - link "UPSRTC" [ref=e345] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/779/UPSRTC
+                - paragraph [ref=e346]: Uttar Pradesh State Road Transport Corporation
+              - link "Book Now" [ref=e349] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/779/UPSRTC
+          - generic [ref=e350]:
+            - img "HRTC" [ref=e352]
+            - img "HRTC" [ref=e356]
+            - generic [ref=e357]:
+              - generic [ref=e358]:
+                - heading "HRTC" [level=3] [ref=e359]:
+                  - link "HRTC" [ref=e360] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/784/HRTC
+                - paragraph [ref=e361]: Himachal Pradesh State Road Transport Corporation
+              - link "Book Now" [ref=e364] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/784/HRTC
+          - generic [ref=e365]:
+            - img "OSRTC" [ref=e367]
+            - img "OSRTC" [ref=e371]
+            - generic [ref=e372]:
+              - generic [ref=e373]:
+                - heading "OSRTC" [level=3] [ref=e374]:
+                  - link "OSRTC" [ref=e375] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1320/OSRTC
+                - paragraph [ref=e376]: Odisha State Road Transport Corporation
+              - link "Book Now" [ref=e379] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1320/OSRTC
+          - generic [ref=e380]:
+            - img "BSRTC" [ref=e382]
+            - img "BSRTC" [ref=e386]
+            - generic [ref=e387]:
+              - generic [ref=e388]:
+                - heading "BSRTC" [level=3] [ref=e389]:
+                  - link "BSRTC" [ref=e390] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1567/BSRTC
+                - paragraph [ref=e391]: Bihar State Road Transport Corporation
+              - link "Book Now" [ref=e394] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1567/BSRTC
+          - generic [ref=e395]:
+            - img "PRTC" [ref=e397]
+            - img "PRTC" [ref=e401]
+            - generic [ref=e402]:
+              - generic [ref=e403]:
+                - heading "PRTC" [level=3] [ref=e404]:
+                  - link "PRTC" [ref=e405] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1487/Pepsu-prtc
+                - paragraph [ref=e406]: PEPSU Road Transport Corporation
+              - link "Book Now" [ref=e409] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1487/Pepsu-prtc
+          - generic [ref=e410]:
+            - img "JKSRTC" [ref=e412]
+            - img "JKSRTC" [ref=e416]
+            - generic [ref=e417]:
+              - generic [ref=e418]:
+                - heading "JKSRTC" [level=3] [ref=e419]:
+                  - link "JKSRTC" [ref=e420] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/782/JKSRTC
+                - paragraph [ref=e421]: Jammu & Kashmir Road Transport Corporation
+              - link "Book Now" [ref=e424] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/782/JKSRTC
+          - generic [ref=e425]:
+            - img "WBTC" [ref=e427]
+            - img "WBTC" [ref=e431]
+            - generic [ref=e432]:
+              - generic [ref=e433]:
+                - heading "WBTC" [level=3] [ref=e434]:
+                  - link "WBTC" [ref=e435] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/3991/WBTC
+                - paragraph [ref=e436]: West Bengal Transport Corporation
+              - link "Book Now" [ref=e439] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/3991/WBTC
+          - generic [ref=e440]:
+            - img "KTCL" [ref=e442]
+            - img "KTCL" [ref=e446]
+            - generic [ref=e447]:
+              - generic [ref=e448]:
+                - heading "KTCL" [level=3] [ref=e449]:
+                  - link "KTCL" [ref=e450] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/1662/kadamba-transport-corporation-limited-ktcl
+                - paragraph [ref=e451]: Kadamba Transport Corporation Limited
+              - link "Book Now" [ref=e454] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/1662/kadamba-transport-corporation-limited-ktcl
+          - generic [ref=e455]:
+            - img "UTC" [ref=e457]
+            - img "UTC" [ref=e461]
+            - generic [ref=e462]:
+              - generic [ref=e463]:
+                - heading "UTC" [level=3] [ref=e464]:
+                  - link "UTC" [ref=e465] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/5829/utc
+                - paragraph [ref=e466]: Uttarakhand Transport Corporation
+              - link "Book Now" [ref=e469] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/5829/utc
+          - generic [ref=e470]:
+            - img "MTC" [ref=e472]
+            - img "MTC" [ref=e476]
+            - generic [ref=e477]:
+              - generic [ref=e478]:
+                - heading "MTC" [level=3] [ref=e479]:
+                  - link "MTC" [ref=e480] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/5835/meghalaya-transport-corporation-mtc
+                - paragraph [ref=e481]: Meghalaya Transport Corporation
+              - link "Book Now" [ref=e484] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/5835/meghalaya-transport-corporation-mtc
+          - generic [ref=e485]:
+            - img "SBSTC" [ref=e487]
+            - img "SBSTC" [ref=e491]
+            - generic [ref=e492]:
+              - generic [ref=e493]:
+                - heading "SBSTC" [level=3] [ref=e494]:
+                  - link "SBSTC" [ref=e495] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/5827/SBSTC
+                - paragraph [ref=e496]: South Bengal State Transport Corporation
+              - link "Book Now" [ref=e499] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/5827/SBSTC
+          - generic [ref=e500]:
+            - img "SNT" [ref=e502]
+            - img "SNT" [ref=e506]
+            - generic [ref=e507]:
+              - generic [ref=e508]:
+                - heading "SNT" [level=3] [ref=e509]:
+                  - link "SNT" [ref=e510] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/5838/sikkim-nationalised-transport-snt
+                - paragraph [ref=e511]: Sikkim Nationalised Transport
+              - link "Book Now" [ref=e514] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/5838/sikkim-nationalised-transport-snt
+          - generic [ref=e515]:
+            - img "ASTC" [ref=e517]
+            - img "ASTC" [ref=e521]
+            - generic [ref=e522]:
+              - generic [ref=e523]:
+                - heading "ASTC" [level=3] [ref=e524]:
+                  - link "ASTC" [ref=e525] [cursor=pointer]:
+                    - /url: https://www.abhibus.com/operator/5828/astc
+                - paragraph [ref=e526]: Assam State Transport Corporation
+              - link "Book Now" [ref=e529] [cursor=pointer]:
+                - /url: https://www.abhibus.com/operator/5828/astc
+          - button "offers-slide-right" [ref=e530] [cursor=pointer]:
+            - img [ref=e531]
+      - generic [ref=e533]:
+        - generic [ref=e536]:
+          - img "Abhi Assured" [ref=e537]
+          - generic [ref=e539]:
+            - generic [ref=e540]:
+              - img [ref=e542]
+              - generic [ref=e547]:
+                - heading "Bus cancelled?" [level=3] [ref=e548]
+                - paragraph [ref=e549]: 150% Refund
+            - generic [ref=e550]:
+              - img [ref=e552]
+              - generic [ref=e556]:
+                - heading "Bad service quality?" [level=3] [ref=e557]
+                - paragraph [ref=e558]: Up to 100% Refund
+            - generic [ref=e559]:
+              - img [ref=e561]
+              - generic [ref=e566]:
+                - heading "Bus delayed?" [level=3] [ref=e567]
+                - paragraph [ref=e568]: Up to 100% Refund
+            - generic [ref=e569]:
+              - img [ref=e571]
+              - generic [ref=e575]:
+                - heading "Changed your plans?" [level=3] [ref=e576]
+                - paragraph [ref=e577]: 100% Refund
+            - button "Read More" [ref=e579] [cursor=pointer]:
+              - img [ref=e581]
+              - generic [ref=e583]: Read More
+        - generic [ref=e585]:
+          - heading "Online Bus Booking Services" [level=2] [ref=e586]
+          - generic [ref=e587]:
+            - generic [ref=e589]:
+              - paragraph [ref=e590]: "AbhiBus is India`s leading online bus ticket booking service provider. Check out budget friendly offers and save big with discount coupons to book bus tickets at the lowest price with us. You can check the bus schedules, compare prices, and find all the information you need to plan an ideal and comfortable bus or train journey."
+              - paragraph [ref=e591]: AbhiBus has simplified the online bus booking process for your travel planning. In case you need to cancel the ticket or change the dates, You can save both time and money by choosing AbhiCash as a refund option which can be used instantly. Book now!!!
+              - paragraph [ref=e592]: Browse through all your bus route options, and use our advanced smart filters to ensure a reliable and comfortable journey, tailored to your scheduled travel plans.
+            - img "Booking Services" [ref=e594]
+        - generic [ref=e596]:
+          - heading "Online Bus Ticket Booking at Lowest Price" [level=2] [ref=e597]
+          - paragraph [ref=e598]:
+            - text: With AbhiBus, travellers can book bus tickets online at the lowest ticket fares. Travellers can choose their favorite bus for online bus booking. AbhiBus is the right place for reserving bus tickets as you will find a wide range of Private buses and SRTC (State Road Transport Corporation) buses are available for
+            - link "bus booking" [ref=e599] [cursor=pointer]:
+              - /url: https://www.abhibus.com/bus-ticket-booking
+            - text: online on AbhiBus.
+          - paragraph [ref=e600]: "Below, you will find various types of buses available to book bus tickets on AbhiBus at the lowest fare for bus ticket booking:"
+          - generic [ref=e601]:
+            - img "Bus Types" [ref=e603]
+            - generic [ref=e604]:
+              - generic [ref=e605]:
+                - list [ref=e607]:
+                  - listitem [ref=e608]: AC Buses
+                  - listitem [ref=e609]: Non AC Buses
+                  - listitem [ref=e610]: Ordinary Buses
+                  - listitem [ref=e611]: Mini Buses
+                  - listitem [ref=e612]: Super Luxury (Non-AC Seater)
+                - list [ref=e614]:
+                  - listitem [ref=e615]: Volvo AC Buses
+                  - listitem [ref=e616]: Sleeper AC Buses
+                  - listitem [ref=e617]: Sleeper Buses
+                  - listitem [ref=e618]: Deluxe Buses
+                  - listitem [ref=e619]: Sleeper Cum Seater AC
+                - list [ref=e621]:
+                  - listitem [ref=e622]: Double Decker Buses
+                  - listitem [ref=e623]: Mercedes buses
+                  - listitem [ref=e624]: Non-Mercedes buses
+                  - listitem [ref=e625]: Electric Buses
+                  - listitem [ref=e626]: Express Buses
+              - paragraph [ref=e627]: The bus ticket fare depends on the factors such as type of bus, bus operator, bus routes distance between origin and destination cities, amenities offered by the bus operator, and bus operators may change ticket prices during festive seasons. Travelling by bus journey is the best option, cost effective and the most convenient travel option compared to other modes of transport.
+        - generic [ref=e629]:
+          - heading "Benefits of Booking Bus Tickets Online" [level=2] [ref=e630]
+          - paragraph [ref=e631]: In this day and age of technology, offline modes of bus ticket booking are no longer preferred. Online ticket booking is easy, fast, and hassle-free. AbhiBus ticks off all the three with user-friendly app and website navigation.Booking bus tickets online with AbhiBus has resolved many issues that people encounter while booking tickets at offline counters or through travel agents. Download the AbhiBus App to experience the benefits of bus ticket booking online.
+          - paragraph [ref=e632]: Here is a list of all the benefits of booking bus tickets online on AbhiBus
+          - generic [ref=e633]:
+            - generic [ref=e634]:
+              - list [ref=e635]:
+                - listitem [ref=e636]: Avoid standing in long queues at offline bus ticket counters.
+                - listitem [ref=e637]: No more hassle of approaching travel agents.
+                - listitem [ref=e638]: Choose from multiple bus services.
+                - listitem [ref=e639]: Book both Private and SRTC bus tickets online.
+                - listitem [ref=e640]: Check bus ticket availability online.
+                - listitem [ref=e641]: Get bus timings, ticket price, boarding & dropping point details online.
+              - list [ref=e642]:
+                - listitem [ref=e643]: Access to payment partner discounts and cashback offers.
+                - listitem [ref=e644]: Free Cancellation - Get 100% refund if your plan changes and you cancel your ticket.
+                - listitem [ref=e645]: 24/7 customer support.
+                - listitem [ref=e646]: Each and every transaction is simple, safe and secure.
+            - img "Online Bus Ticket Booking Benefits" [ref=e648]
+        - generic [ref=e650]:
+          - heading "Offers on Bus Booking" [level=2] [ref=e651]
+          - paragraph [ref=e653]:
+            - text: Travellers can find exclusive
+            - link "bus booking offers" [ref=e654] [cursor=pointer]:
+              - /url: https://www.abhibus.com/bus-ticket-offers
+            - text: ", discount coupons, cashback and more on AbhiBus. You can book bus tickets at the lowest price to any destination in India.Choose bus ticket fares from operators offering the lowest, mid-range, and highest prices on AbhiBus. Check for bus ticket price comparisons, select your preferred bus for bus booking, apply coupon code and save money on your bus journey today!"
+        - generic [ref=e656]:
+          - heading "How to Book Bus Tickets Online on AbhiBus" [level=2] [ref=e657]
+          - paragraph [ref=e658]: Each and every booking or transaction you do on the AbhiBus website is simple, safe & secure. You can complete your booking process from the best bus booking website AbhiBus.com by following the steps mentioned below.
+          - generic [ref=e659]:
+            - img "How to Book Bus Tickets Online on AbhiBus" [ref=e661]
+            - generic [ref=e662]:
+              - list [ref=e663]:
+                - listitem [ref=e664]: Enter the Origin city and Destination city details in the “leaving from” and “Going to” fields respectively
+                - listitem [ref=e665]: Select the “Journey date” from calendar icon and click on the “Search” button
+                - listitem [ref=e666]: Select any bus operator of your choice from the list of buses which are displayed buses
+                - listitem [ref=e667]: Select a seat, boarding and dropping points and hit “Continue to payment”
+                - listitem [ref=e668]: Enter all the required information including contact number & passenger details
+                - listitem [ref=e669]: Complete the payment process by selecting your preferred mode of payment
+              - paragraph [ref=e670]: Once the payment process is done, you will receive an M-ticket on your mobile via SMS, whatsapp message and an e-ticket on email ID provided at “Enter Contact Details” field.
+        - generic [ref=e672]:
+          - heading "Last Hour Ticket Booking" [level=2] [ref=e673]
+          - generic [ref=e674]:
+            - generic [ref=e675]:
+              - paragraph [ref=e676]: Most of the online bus bookings are unplanned, with only 32% of the people reserving tickets on the day of travel and 24% one day before the journey. Keeping this in mind, AbhiBus has ensured buses are available round the clock 24/7 by listing all the scheduled buses. At times you could be the lucky one because many of our bus partners provide last-minute deals that offer up to 25% discount on the bus ticket fare. You can experience flexibility in both bus timings and price choices when booking tickets on AbhiBus.
+              - paragraph [ref=e677]: AbhiBus provides the quickest way to find last-minute online bus bookings, allowing you to compare prices, operator schedules, and more.Travellers can enjoy the affordability and convenience that comes with thousands of trusted bus operators who have partnered with us in India. You can avail last-minute ticket booking options and choose from multiple pick-up and drop-off locations on AbhiBus.com.
+            - img "Last Hour Ticket Booking" [ref=e679]
+        - generic [ref=e681]:
+          - heading "The Best Way to Book Bus Ticket" [level=2] [ref=e682]
+          - generic [ref=e683]:
+            - img "The Best Way to Book Bus Ticket" [ref=e685]
+            - generic [ref=e686]:
+              - paragraph [ref=e687]: Do you want to know the best way to book tickets online securely and how to book tickets in advance? AbhiBus.com is the platform for you to book bus tickets, train tickets, Flights and hotels. With us, you can check the provided amenities, compare booking fares, check bus time & schedule on your chosen route, explore additional facilities, and more. AbhiBus offers an affordable and cost-effective online travel booking experience.
+              - paragraph [ref=e688]: With AbhiBus, online bus ticket booking became easier. Simply enter your journey details in our search bar (departure city, destination city, and travel date), click the search button, and you will receive a list of available bus operators for online ticket booking.Then, select the bus that best suits your travel needs and securely complete your booking online on AbhiBus.com.
+              - paragraph [ref=e689]: We recommend booking your tickets at least 2 - 3 days in advance so that you can reserve bus seats as per your preference and get the best-discounted price on your booking.
+        - generic [ref=e691]:
+          - heading "Top Private Travels" [level=2] [ref=e692]
+          - generic [ref=e696]:
+            - link "Fresh Bus" [ref=e697] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/3992/fresh-bus
+              - img "Fresh Bus" [ref=e698]
+            - link "Zingbus" [ref=e699] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/3048/zingbus
+              - img "Zingbus" [ref=e700]
+            - link "Intrcity Smartbus" [ref=e701] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/2760/intrcity-smartbus
+              - img "Intrcity Smartbus" [ref=e702]
+            - link "Flixbus" [ref=e703] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/5982/flixbus
+              - img "Flixbus" [ref=e704]
+            - link "Shyamoli" [ref=e705] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/3260/shyamoli-paribahan-private-limited
+              - img "Shyamoli" [ref=e706]
+            - link "Sugama Tourist" [ref=e707] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/46/Sugama-Travels
+              - img "Sugama Tourist" [ref=e708]
+            - link "Purple Bus" [ref=e709] [cursor=pointer]:
+              - /url: https://www.abhibus.com/operator/630/Prasanna-Purple-Travels
+              - img "Purple Bus" [ref=e710]
+        - generic [ref=e712]:
+          - heading "Popular Bus Routes" [level=2] [ref=e713]
+          - paragraph [ref=e714]: You can check popular bus routes, compare bus schedules, timings and their prices to book bus tickets online. AbhiBus offers you low-cost bus fares for your travel across India. For a seamless travel experience, book bus tickets online with AbhiBus for your bus journey.
+          - generic [ref=e715]:
+            - generic [ref=e718]:
+              - img "Bangalore to Hyderabad" [ref=e720]
+              - generic [ref=e721]:
+                - text: Bangalore
+                - img [ref=e722]
+                - text: Hyderabad
+              - link "View Buses" [ref=e725] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/10/Bangalore-Hyderabad
+            - generic [ref=e728]:
+              - img "Hyderabad to Vijayawada" [ref=e730]
+              - generic [ref=e731]:
+                - text: Hyderabad
+                - img [ref=e732]
+                - text: Vijayawada
+              - link "View Buses" [ref=e735] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/7/Hyderabad-Vijayawada
+            - generic [ref=e738]:
+              - img "Bangalore to Chennai" [ref=e740]
+              - generic [ref=e741]:
+                - text: Bangalore
+                - img [ref=e742]
+                - text: Chennai
+              - link "View Buses" [ref=e745] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/2/Bangalore-Chennai
+            - generic [ref=e748]:
+              - img "Hyderabad to Visakhapatnam" [ref=e750]
+              - generic [ref=e751]:
+                - text: Hyderabad
+                - img [ref=e752]
+                - text: Visakhapatnam
+              - link "View Buses" [ref=e755] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/8/Hyderabad-Visakhapatnam
+            - generic [ref=e758]:
+              - img "Bangalore to Tirupathi" [ref=e760]
+              - generic [ref=e761]:
+                - text: Bangalore
+                - img [ref=e762]
+                - text: Tirupathi
+              - link "View Buses" [ref=e765] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/4156/Bangalore-Tirupathi
+            - generic [ref=e768]:
+              - img "Hyderabad to Tirupathi" [ref=e770]
+              - generic [ref=e771]:
+                - text: Hyderabad
+                - img [ref=e772]
+                - text: Tirupathi
+              - link "View Buses" [ref=e775] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/8338/Hyderabad-Tirupathi
+            - generic [ref=e778]:
+              - img "Delhi to Lucknow" [ref=e780]
+              - generic [ref=e781]:
+                - text: Delhi
+                - img [ref=e782]
+                - text: Lucknow
+              - link "View Buses" [ref=e785] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/107/Delhi-Lucknow
+            - generic [ref=e788]:
+              - img "Chennai to Madurai" [ref=e790]
+              - generic [ref=e791]:
+                - text: Chennai
+                - img [ref=e792]
+                - text: Madurai
+              - link "View Buses" [ref=e795] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/30/Chennai-Madurai
+            - generic [ref=e798]:
+              - img "Delhi to Manali" [ref=e800]
+              - generic [ref=e801]:
+                - text: Delhi
+                - img [ref=e802]
+                - text: Manali
+              - link "View Buses" [ref=e805] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/108/Delhi-Manali
+            - generic [ref=e808]:
+              - img "Delhi to Jaipur" [ref=e810]
+              - generic [ref=e811]:
+                - text: Delhi
+                - img [ref=e812]
+                - text: Jaipur
+              - link "View Buses" [ref=e815] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/39/Delhi-Jaipur
+            - generic [ref=e818]:
+              - img "Mumbai to Pune" [ref=e820]
+              - generic [ref=e821]:
+                - text: Mumbai
+                - img [ref=e822]
+                - text: Pune
+              - link "View Buses" [ref=e825] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/47/Mumbai-Pune
+            - generic [ref=e828]:
+              - img "Pune to Nagpur" [ref=e830]
+              - generic [ref=e831]:
+                - text: Pune
+                - img [ref=e832]
+                - text: Nagpur
+              - link "View Buses" [ref=e835] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/111/Pune-Nagpur
+            - generic [ref=e838]:
+              - img "Hyderabad to Nellore" [ref=e840]
+              - generic [ref=e841]:
+                - text: Hyderabad
+                - img [ref=e842]
+                - text: Nellore
+              - link "View Buses" [ref=e845] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/95/Hyderabad-Nellore
+            - generic [ref=e848]:
+              - img "Chennai to Coimbatore" [ref=e850]
+              - generic [ref=e851]:
+                - text: Chennai
+                - img [ref=e852]
+                - text: Coimbatore
+              - link "View Buses" [ref=e855] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/24/Chennai-Coimbatore
+            - generic [ref=e858]:
+              - img "Mumbai to Indore" [ref=e860]
+              - generic [ref=e861]:
+                - text: Mumbai
+                - img [ref=e862]
+                - text: Indore
+              - link "View Buses" [ref=e865] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/109/Mumbai-Indore
+            - generic [ref=e868]:
+              - img "Ahmedabad to Rajkot" [ref=e870]
+              - generic [ref=e871]:
+                - text: Ahmedabad
+                - img [ref=e872]
+                - text: Rajkot
+              - link "View Buses" [ref=e875] [cursor=pointer]:
+                - /url: https://www.abhibus.com/buses/103/Ahmedabad-Rajkot
+        - generic [ref=e878]:
+          - heading "Track Your Bus Live Location" [level=2] [ref=e879]
+          - paragraph [ref=e880]:
+            - text: AbhiBus is solving the biggest concern while boarding a bus by providing a tracking option that provides the live location of the bus. This option keeps passengers informed about the bus live location so that passengers can plan their boarding accordingly. AbhiBus live bus tracking system allows you to track your bus status by entering your AbhiBus Booking ID and either Email ID or Mobile Number details in the input field box. It's a simple, fast, and secure way to manage, track your bus live location on Google Maps with
+            - link "AbhiBus live bus tracking" [ref=e881] [cursor=pointer]:
+              - /url: https://www.abhibus.com/live-bus-tracking
+            - text: technology. Find scheduled bus departure and arrival times of your bus route, the distance between cities and more information.
+          - paragraph [ref=e882]: Booking Bus tickets online in advance and reserving your seats also gives you benefits on early bird discount offers and help you to plan a hassle-free bus journey. Book bus tickets now and enjoy the live bus tracking status online with us.
+      - generic [ref=e884]:
+        - heading "Online Bus Booking FAQ’s" [level=2] [ref=e886]
+        - generic [ref=e888]:
+          - generic [ref=e889]:
+            - generic [ref=e890] [cursor=pointer]:
+              - heading "Q. How do you do online bus reservation on AbhiBus?" [level=3] [ref=e892]
+              - img [ref=e894]
+            - generic [ref=e896]: "Ans: Booking a bus ticket online in India is easy with ABHIBUS. Simply enter the Leaving from (Origin City) -- Going to (destination city) details along with the date you wish to travel in the bus search option on the site. Within seconds you will be given a list of available running buses for your route. Select the bus that best suits you, then just follow the bus ticket booking process by selecting your seat, providing passenger details and completing the payment process. Upon successful booking confirmation, you will receive an e-ticket over SMS/whatsapp and email."
+          - generic [ref=e898] [cursor=pointer]:
+            - heading "Q. Do I need to create an account to book bus tickets on AbhiBus?" [level=3] [ref=e900]
+            - img [ref=e902]
+          - generic [ref=e905] [cursor=pointer]:
+            - heading "Q. How to sign-up AbhiBus?" [level=3] [ref=e907]
+            - img [ref=e909]
+          - generic [ref=e912] [cursor=pointer]:
+            - heading "Q. Can I book Government SRTC bus tickets on AbhiBus?" [level=3] [ref=e914]
+            - img [ref=e916]
+        - button "View all FAQs" [ref=e919] [cursor=pointer]
+      - generic [ref=e922]:
+        - generic [ref=e925]:
+          - paragraph [ref=e926]: Bus routes across india
+          - heading "0+" [level=2] [ref=e927]
+        - generic [ref=e928]:
+          - paragraph [ref=e929]: Bus partners
+          - heading "0+" [level=2] [ref=e930]
+        - generic [ref=e931]:
+          - paragraph [ref=e932]: Trusted travellers
+          - heading "0+" [level=2] [ref=e933]
+        - generic [ref=e934]:
+          - paragraph [ref=e935]: Buses with discounts
+          - heading "0+" [level=2] [ref=e936]
+      - generic [ref=e939]:
+        - img "LeftCircleBg" [ref=e941]
+        - img "RightCircleBg" [ref=e943]
+        - img "Abhibus Logo" [ref=e945]
+        - generic [ref=e946]:
+          - heading "Download the App & Start Booking" [level=2] [ref=e947]
+          - generic [ref=e948]: Sign up now & Get up to ₹500 OFF
+          - generic [ref=e949]: on your first booking!
+          - contentinfo [ref=e950] [cursor=pointer]: "Use code: ABHIFIRST"
+        - generic [ref=e951]:
+          - generic [ref=e952]:
+            - img [ref=e953]
+            - text: Get exclusive discounts
+          - generic [ref=e959]:
+            - img [ref=e960]
+            - text: Receive instant fare alerts
+          - generic [ref=e966]:
+            - img [ref=e967]
+            - text: Track bus status
+          - generic [ref=e973]:
+            - contentinfo [ref=e974] [cursor=pointer]: "4.8"
+            - img "App Install Rating" [ref=e975]
+        - generic [ref=e976]:
+          - img "Abhibus QR code" [ref=e978]
+          - generic [ref=e979]:
+            - button "Install iOS App" [ref=e980] [cursor=pointer]:
+              - img "AbhiBus iOS App" [ref=e981]
+            - button "Install Android App" [ref=e982] [cursor=pointer]:
+              - img "AbhiBus Android App" [ref=e983]
+      - generic [ref=e985]:
+        - heading "About Abhibus" [level=2] [ref=e986]
+        - paragraph [ref=e987]: AbhiBus, over the years, has strived to deliver easy booking solutions to its customers. Our continued efforts have resulted in AbhiBus becoming one of the leading and top-rated bus booking platforms in India for various Bus services. We have a strong presence with a ticket inventory from over 6200 bus partners and 650000 route options on our app and website.
+        - paragraph [ref=e988]: Founded in the year 2008, AbhiBus is a pioneer in providing end-to-end software and other value-added solutions such as e-ticketing systems, fleet management solutions, vehicle tracking systems, passenger information systems, and logistics management backed by a 24x7 customer support center. The company also provides technology solutions to more than 300 large private bus partners in India, 5 state transport corporations, and 2 international bus partners.
+        - paragraph [ref=e989]:
+          - link "Know more about Abhibus" [ref=e990] [cursor=pointer]:
+            - /url: /about
+  - contentinfo [ref=e991]:
+    - generic [ref=e992]:
+      - generic [ref=e993]:
+        - generic [ref=e995]:
+          - generic [ref=e996]:
+            - button "Top Bus Routes" [ref=e997] [cursor=pointer]
+            - button "Buses From Top Cities" [ref=e998] [cursor=pointer]
+            - button "Top RTC Buses" [ref=e999] [cursor=pointer]
+            - button "Top Bus Services" [ref=e1000] [cursor=pointer]
+            - button "Quick Links" [ref=e1001] [cursor=pointer]
+          - generic [ref=e1003]:
+            - link "Hyderabad to Bangalore Bus" [ref=e1005] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/1/Hyderabad-Bangalore
+            - link "Hyderabad to Vijayawada Bus" [ref=e1007] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/7/Hyderabad-Vijayawada
+            - link "Hyderabad to Mumbai Bus" [ref=e1009] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/9/Hyderabad-Mumbai
+            - link "Vijayawada to Bangalore Bus" [ref=e1011] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/77/Vijayawada-Bangalore
+            - link "Vijayawada to Hyderabad Bus" [ref=e1013] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/79/Vijayawada-Hyderabad
+            - link "Bangalore to Hyderabad Bus" [ref=e1015] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/10/Bangalore-Hyderabad
+            - link "Bangalore to Chennai Bus" [ref=e1017] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/2/Bangalore-Chennai
+            - link "Chennai to Bangalore Bus" [ref=e1019] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/23/Chennai-Bangalore
+            - link "Chennai to Madurai Bus" [ref=e1021] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/30/Chennai-Madurai
+            - link "Chennai to Coimbatore Bus" [ref=e1023] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/24/Chennai-Coimbatore
+            - link "Mumbai to Pune Bus" [ref=e1025] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/47/Mumbai-Pune
+            - link "Mumbai to Hyderabad Bus" [ref=e1027] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/46/Mumbai-Hyderabad
+            - link "Mumbai to Ahmedabad Bus" [ref=e1029] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/43/Mumbai-Ahmedabad
+            - link "Indore to Bhopal Bus" [ref=e1031] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/139/Indore-Bhopal
+            - link "Indore to Ahmedabad Bus" [ref=e1033] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/141/Indore-Ahmedabad
+            - link "Ahmedabad to Jaipur Bus" [ref=e1035] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/106/Ahmedabad-Jaipur
+            - link "Ahmedabad to Rajkot Bus" [ref=e1037] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/103/Ahmedabad-Rajkot
+            - link "Ahmedabad to Indore Bus" [ref=e1039] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/312/Ahmedabad-Indore
+            - link "Udaipur to Jaipur Bus" [ref=e1041] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/914/Udaipur-Jaipur
+            - link "Jaipur to Delhi Bus" [ref=e1043] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/120/Jaipur-Delhi
+            - link "Jaipur to Ahmedabad Bus" [ref=e1045] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/94/Jaipur-Ahmedabad
+            - link "Delhi to Lucknow Bus" [ref=e1047] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/107/Delhi-Lucknow
+            - link "Delhi to Gorakhpur Bus" [ref=e1049] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/6116/Delhi-Gorakhpur
+            - link "Delhi to Shimla Bus" [ref=e1051] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/415/Delhi-Shimla
+            - link "Delhi to Jaipur Bus" [ref=e1053] [cursor=pointer]:
+              - /url: https://www.abhibus.com/buses/39/Delhi-Jaipur
+        - generic [ref=e1054]:
+          - separator [ref=e1056]
+          - heading "Important Links" [level=2] [ref=e1058]
+          - generic [ref=e1059]:
+            - link "Home" [ref=e1060] [cursor=pointer]:
+              - /url: /
+            - link "Offer" [ref=e1061] [cursor=pointer]:
+              - /url: /bus-ticket-offers
+            - link "About" [ref=e1062] [cursor=pointer]:
+              - /url: /about
+            - link "Contact" [ref=e1063] [cursor=pointer]:
+              - /url: /contact
+            - link "FAQ's" [ref=e1064] [cursor=pointer]:
+              - /url: /faq
+            - link "Terms" [ref=e1065] [cursor=pointer]:
+              - /url: /terms
+            - link "Privacy" [ref=e1066] [cursor=pointer]:
+              - /url: /privacy
+            - link "Responsible Disclosure" [ref=e1067] [cursor=pointer]:
+              - /url: /responsible-disclosure-policy
+            - link "Operators" [ref=e1068] [cursor=pointer]:
+              - /url: /operators
+            - link "Routes" [ref=e1069] [cursor=pointer]:
+              - /url: /routes
+            - link "Careers" [ref=e1070] [cursor=pointer]:
+              - /url: https://www.abhibus.com/careers/
+            - link "Our Management" [ref=e1071] [cursor=pointer]:
+              - /url: https://careers.ixigo.com/about
+            - link "Investors Relations" [ref=e1072] [cursor=pointer]:
+              - /url: https://www.ixigo.com/about/investor-relations
+            - link "Cancellation Policy" [ref=e1073] [cursor=pointer]:
+              - /url: https://www.abhibus.com/abhibusFreeCancellationPolicy/
+      - generic [ref=e1075]:
+        - generic [ref=e1076]:
+          - link "AbhiBus" [ref=e1077] [cursor=pointer]:
+            - /url: https://www.abhibus.com/
+          - text: "|"
+          - link "ixigo" [ref=e1078] [cursor=pointer]:
+            - /url: https://www.ixigo.com/
+          - text: "|"
+          - link "Confirm Tkt" [ref=e1079] [cursor=pointer]:
+            - /url: https://www.confirmtkt.com/
+        - generic [ref=e1080]: © 2025 Le Travenues Technology Ltd. India. All brands are trademarks of their respective owners
+        - text: • • • •
+        - generic [ref=e1081]:
+          - link "• Privacy" [ref=e1082] [cursor=pointer]:
+            - /url: /privacy
+          - link "• Terms of Use" [ref=e1083] [cursor=pointer]:
+            - /url: /terms
+          - link "• Career" [ref=e1084] [cursor=pointer]:
+            - /url: https://www.abhibus.com/careers/
+          - link "• Customer Service" [ref=e1085] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e1086]:
+          - link [ref=e1087] [cursor=pointer]:
+            - /url: https://www.facebook.com/abhibus
+            - img [ref=e1088]
+          - link [ref=e1090] [cursor=pointer]:
+            - /url: https://x.com/abhibusIN
+            - img [ref=e1091]
+          - link [ref=e1094] [cursor=pointer]:
+            - /url: https://www.instagram.com/abhibusindia/
+            - img [ref=e1095]
+          - link [ref=e1099] [cursor=pointer]:
+            - /url: https://in.linkedin.com/company/abhibus
+            - img [ref=e1100]
+          - link [ref=e1102] [cursor=pointer]:
+            - /url: https://www.youtube.com/user/abhibus
+            - img [ref=e1103]
+  - alert [ref=e1106]
+```
+
+# Test source
+
+```ts
+  1  | import { expect, Locator, Page } from "@playwright/test";
+  2  | import { ENV } from "../config/env";
+  3  | export class AbhiBusHomePage {
+  4  |  
+  5  |     page: Page;
+  6  |     searchButton: Locator;
+  7  |     fromInput: Locator;
+  8  |     toInput: Locator;
+  9  |     datePicker: Locator;
+  10 |     notFoundContainer : Locator;
+  11 |  
+  12 |     constructor(page: Page) {
+  13 |  
+  14 |         this.page = page;
+  15 |         this.fromInput = page.getByPlaceholder("Leaving From");
+  16 |         this.toInput = page.getByPlaceholder("Going To");
+  17 |         this.searchButton = page.locator("#search-container").getByRole("button", { name: "Search" });
+  18 |         this.datePicker = page.getByPlaceholder("Onward Journey Date");
+  19 |         this.notFoundContainer = page.locator('#not-found-container').getByRole('heading', { name: 'There are no services on this route for the selected date. Select bus services available on alternative dates for this route.' });
+  20 |  
+  21 |     }
+  22 |  
+  23 |     async AbhiBusURL(): Promise<void> {
+> 24 |         await this.page.goto(ENV.BASE_URL);
+     |                         ^ Error: page.goto: Test timeout of 30000ms exceeded.
+  25 |         // console.log("Current URL:", this.page.url());
+  26 |         await expect(this.page).toHaveURL(/abhibus/);
+  27 |         await expect(this.fromInput).toBeVisible({timeout: 30000});
+  28 |     }
+  29 |  
+  30 |     async fromInputField(leavingCityName: string): Promise<void>{
+  31 |         await this.fromInput.click();
+  32 |         await this.fromInput.fill(leavingCityName);
+  33 |         await this.page.getByText(leavingCityName, { exact: true }).first().click();
+  34 |         await expect(this.fromInput).toHaveValue(leavingCityName);
+  35 |     }
+  36 |  
+  37 |     async toInputField(destinationCityName: string): Promise<void> {
+  38 |         await this.toInput.click();
+  39 |         await this.toInput.fill(destinationCityName);
+  40 |         await this.page.getByText(destinationCityName, { exact: true }).first().click();
+  41 |         await expect(this.toInput).toHaveValue(destinationCityName);
+  42 |     }
+  43 |  
+  44 |     async selectDate(date : string ) : Promise<void>{
+  45 |         await this.datePicker.click();
+  46 |         await this.page.getByRole("button", { name: date }).click();
+  47 |         await expect(this.datePicker).toHaveValue(`${date}/06/2026`);
+  48 |     }
+  49 |  
+  50 |     async pressSearchButton(){
+  51 |         await this.searchButton.click();
+  52 |     }
+  53 | 
+  54 |     async verifyNoServiceMessage(){
+  55 |         await expect(this.notFoundContainer).toBeVisible();
+  56 |     }
+  57 |  
+  58 | }
+```
