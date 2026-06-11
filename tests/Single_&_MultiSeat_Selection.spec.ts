@@ -29,7 +29,7 @@ test.describe("Bus Booking Flow", () => {
     await BusSearch.pressSearchButton();
   });
   
-  test.only("Singel seat selection", {tag: '@regression'}, async ({page}) => {
+  test("Singel seat selection", {tag: '@regression'}, async ({page}) => {
     test.setTimeout(600000);
     const BusFilter = new BusSelectionPage(page);
     const PassengerInfo = new PassengerInfoPage(page);
