@@ -133,5 +133,6 @@ pnpm-lock.yaml
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-test-data/userAuth.json
-tests/Flight_Ticket_Booking.spec.ts
+# test-data/userAuth.json
+# tests/Flight_Ticket_Booking.spec.ts
+tests/Login_Flow_OTP.spec.ts

@@ -31,7 +31,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     headless : true,
-    // storageState : "test-data/userAuth.json",
+    storageState : "test-data/userAuth.json",
     screenshot : "only-on-failure",
     video: "retain-on-failure"
   },

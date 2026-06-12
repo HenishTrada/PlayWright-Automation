@@ -19,6 +19,7 @@ export class AbhiBusFlightsPage {
     verifyHeading: Locator;
 
     constructor(page: Page) {
+
         this.page = page;
         this.flightsLink = page.getByRole('link', { name: 'Flights' });
         this.closeButton = page.locator(".closeButton");
@@ -51,7 +52,6 @@ export class AbhiBusFlightsPage {
     async goToFlightsTab(): Promise<void> {
         await this.flightsLink.click();
         await this.closeOfferbanner();
-        // await expect(this.fromTrigger).toBeVisible({ timeout: 30000 });
     }
 
     async selectOrigin(cityName: string, airportName: string): Promise<void> {
@@ -61,7 +61,6 @@ export class AbhiBusFlightsPage {
     }
 
     async selectDestination(cityName: string, locationName: string): Promise<void> {
-        // await this.toTrigger.click();
         await this.toTrigger.pressSequentially(cityName, { delay: 200, timeout: 4000 });
         await this.page.getByText(locationName, { exact: true }).click();
     }
@@ -73,6 +72,7 @@ export class AbhiBusFlightsPage {
 
     async selectReturnDate(ariaLabel: string): Promise<void> {
         await this.returnDate.click();
+        await this.page.waitForTimeout(4000);
         await this.page.locator(`abbr[aria-label='${ariaLabel}']`).click();
     }
 
