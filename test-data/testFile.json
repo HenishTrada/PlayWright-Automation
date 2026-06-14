@@ -2,7 +2,7 @@
     "Journey_Detail": {
         "BOARDING_CITY": "Ahmedabad",
         "DESTINATION_CITY": "Mumbai",
-        "DATE_OF_JOURNEY": "12"
+        "DATE_OF_JOURNEY": "18"
     },
     "Invalid_Journey_Detail" : {
         "BOARDING_CITY": "Ahmedabad",
@@ -26,5 +26,11 @@
                 "gender": "Male"
             }
         ]
-    }
+    },
+     "Flight_Passenger_Detail": [
+        { "title": "Mr", "firstName": "Henish", "lastName": "Trada", "nationality": "India" },
+        { "title": "Mr", "firstName": "Rahul", "lastName": "Shah", "nationality": "India" },
+        { "title": "Ms", "firstName": "Priya", "lastName": "Patel", "nationality": "India" },
+        { "title": "Mrs", "firstName": "Neha", "lastName": "Mehta", "nationality": "India" }
+    ]
 }

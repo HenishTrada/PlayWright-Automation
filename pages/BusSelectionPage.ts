@@ -101,7 +101,6 @@ export class BusSelectionPage {
     async selectBoardingPoint() {
         const boardingTabStatus = this.BoardingAndDroppingTabs.first();
         await expect(boardingTabStatus).toHaveAttribute("class", /active/);
-        // await this.page.pause();
         const boardingLocation = this.BoardingAndDroppingList.locator('.container  ').first();
         await boardingLocation.waitFor({ state: "visible" });
         await boardingLocation.click();
@@ -109,14 +108,11 @@ export class BusSelectionPage {
 
     async selectDroppingPoint() {
         const selectDroppingTab = this.BoardingAndDroppingTabs.nth(1);
-        // await selectDroppingTab.click();
         await expect(selectDroppingTab).toHaveAttribute("class", /active/);
 
         const droppingLocation = this.BoardingAndDroppingList.locator('.container  ').first();
         await this.BoardingAndDroppingList.scrollIntoViewIfNeeded();
         await droppingLocation.click();
-
-        // await this.page.waitForTimeout(2000);
 
         await this.ProceedButton.waitFor({ state: "visible" });
         await this.ProceedButton.click();

@@ -22,7 +22,6 @@ export class AbhiBusHomePage {
  
     async AbhiBusURL(): Promise<void> {
         await this.page.goto(ENV.BASE_URL);
-        // console.log("Current URL:", this.page.url());
         await expect(this.page).toHaveURL(/abhibus/);
         await expect(this.fromInput).toBeVisible({timeout: 30000});
     }

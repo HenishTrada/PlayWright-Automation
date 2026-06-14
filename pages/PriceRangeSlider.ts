@@ -42,7 +42,6 @@ export class SliderPage {
     await this.page.mouse.move(targetX, centerY, { steps: 20 });
     await this.page.mouse.up();
 
-    // Nudge with keyboard to fix remaining drift (±few units at most)
     const { current: landedValue } = await this.getSliderInfo(thumbIndex);
     if (landedValue !== targetValue) {
       const difference = targetValue - landedValue;

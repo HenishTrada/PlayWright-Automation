@@ -53,7 +53,6 @@ export class PassengerInfoPage {
     }
 
     async selectSecureAddonIfPresent() {
-        // Give the page a moment to render conditional elements
         const isPresent = await this.SecureRadioButton
             .waitFor({ state: 'visible', timeout: 3000 })
             .then(() => true)

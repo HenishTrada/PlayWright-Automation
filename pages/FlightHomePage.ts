@@ -9,14 +9,8 @@ export class AbhiBusFlightsPage {
     fromInput: Locator;
     toInput: Locator;
     departureDate: Locator;
-    returnDate: Locator;
     travellersTrigger: Locator;
     searchButton: Locator;
-
-    loginButton: Locator;
-    mobileNumberField: Locator;
-    continueButton: Locator;
-    verifyHeading: Locator;
 
     constructor(page: Page) {
 
@@ -28,14 +22,8 @@ export class AbhiBusFlightsPage {
         this.fromInput = page.locator(`//div/div[2]/input`).nth(1);
         this.toInput = page.locator(`//div/div[2]/input`).nth(1);
         this.departureDate = page.getByTestId('departureDate');
-        this.returnDate = page.locator('div').filter({ hasText: /^Return$/ }).nth(2);
         this.travellersTrigger = page.getByTestId('pax');
         this.searchButton = page.getByRole('button', { name: 'Search' });
-
-        this.loginButton = page.getByRole('button', { name: 'Log in/Sign up' }).first();
-        this.mobileNumberField = page.getByRole('textbox', { name: 'Enter Mobile Number' });
-        this.continueButton = page.getByRole('button', { name: 'Continue' });
-        this.verifyHeading = page.getByRole('heading', { name: 'Verify Your Mobile Number', level: 5 });
     }
 
     async closeOfferbanner() {
@@ -70,12 +58,6 @@ export class AbhiBusFlightsPage {
         await this.page.locator(`abbr[aria-label='${ariaLabel}']`).click();
     }
 
-    async selectReturnDate(ariaLabel: string): Promise<void> {
-        await this.returnDate.click();
-        await this.page.waitForTimeout(4000);
-        await this.page.locator(`abbr[aria-label='${ariaLabel}']`).click();
-    }
-
     async setTravellers(adultsCount: number): Promise<void> {
         await this.travellersTrigger.click();
         await this.page.locator(`[data-testid="${adultsCount}"]`).first().click();
@@ -83,28 +65,5 @@ export class AbhiBusFlightsPage {
 
     async pressSearchButton(): Promise<void> {
         await this.searchButton.click();
-    }
-
-    async loginFunc() {
-        await expect(this.loginButton).toBeVisible({ timeout: 4000 });
-        await this.loginButton.click();
-
-        await this.mobileNumberField.click();
-        await this.mobileNumberField.pressSequentially("8200079192");
-        await this.continueButton.click();
-
-        await expect(this.verifyHeading).toBeVisible({ timeout: 4000 });
-
-    }
-
-    async fillOtp(page: Page, otp: string): Promise<void> {
-        const digits = otp.split('');
-        const inputs = page.locator('#otp [type="number"]');
-
-        await expect(inputs).toHaveCount(digits.length);
-
-        for (let i = 0; i < digits.length; i++) {
-            await inputs.nth(i).fill(digits[i]);
-        }
     }
 }

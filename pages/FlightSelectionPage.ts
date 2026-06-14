@@ -12,7 +12,7 @@ export class FlightSelectionPage {
     departureTime: Locator;
     arrivalTime: Locator;
     bookButton : Locator;
-    continueButton : Locator;
+    nonStopFlightCheckbox : Locator;
 
     constructor(page: Page) {
 
@@ -26,12 +26,10 @@ export class FlightSelectionPage {
 
         this.priceSlider = new SliderComponent(page, priceSliderInput);
         this.durationSlider = new SliderComponent(page, durationSliderInput);
-
         this.departureTime = page.locator('input[name="takeOff"][value="MORNING"]');
         this.arrivalTime = page.locator('input[name="landing"][value="MORNING"]');
-
-        this.bookButton = page.getByRole('button', { name: 'Book' });
-        this.continueButton = page.getByRole('button', { name: 'Continue' });
+        this.bookButton = page.getByRole('button', { name: 'Book' }).first();
+        this.nonStopFlightCheckbox = page.locator(`input[type="checkbox"][value="0"]`);
     }
 
 
@@ -80,15 +78,10 @@ export class FlightSelectionPage {
     }
 
     async proceedToBook(){
+        await this.bookButton.scrollIntoViewIfNeeded();
         await expect(this.bookButton).toBeVisible();
         await this.bookButton.click();
-
         await this.page.waitForLoadState("domcontentloaded");
-
-        await expect(this.continueButton).toBeVisible();
-        await this.continueButton.click();
-
-        await this.page.waitForTimeout(4000);
     }
 
 }

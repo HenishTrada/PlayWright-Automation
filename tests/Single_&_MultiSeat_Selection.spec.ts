@@ -7,7 +7,6 @@ import { ENV } from "../config/env";
 import testData from "../test-data/testFile.json"
 import { SliderPage } from "../pages/PriceRangeSlider";
 
-//Grouping using ".describe" to execute the independent testcases parallel using 
 test.describe("Bus Booking Flow", () => {
 
   test.beforeAll(async ({}, workerInfo) => {
