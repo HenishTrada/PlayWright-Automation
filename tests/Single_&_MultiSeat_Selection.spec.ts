@@ -44,7 +44,7 @@ test.describe("Bus Booking Flow", () => {
     await paymentpage.GenerateQRCode();
   });
 
-  test.only("Multiple Seat selection", { tag: "@smoke" }, async ({ page, busfilter, passengerInfoPage, paymentpage }) => {
+  test("Multiple Seat selection", { tag: "@smoke" }, async ({ page, busfilter, passengerInfoPage, paymentpage }) => {
 
     await page.waitForLoadState("load");
 
