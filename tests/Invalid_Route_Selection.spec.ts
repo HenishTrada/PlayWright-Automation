@@ -1,17 +1,13 @@
-import { expect, test } from "@playwright/test";
-import { AbhiBusHomePage } from "../pages/AbhiBusHomePage";
+import { test } from "../fixture/BaseFixture.ts";
 import testData from "../test-data/testFile.json";
 
+test("Invalid Route", async ({ homePage }) => {
 
-test("Invalid Route", async ({ page }) => {
+    await homePage.AbhiBusURL();
+    await homePage.fromInputField(testData.Invalid_Journey_Detail.BOARDING_CITY);
+    await homePage.toInputField(testData.Invalid_Journey_Detail.DESTINATION_CITY);
+    await homePage.selectDate(testData.Invalid_Journey_Detail.DATE_OF_JOURNEY);
+    await homePage.pressSearchButton();
 
-    const BusSearch = new AbhiBusHomePage(page);
-
-    await BusSearch.AbhiBusURL();
-    await BusSearch.fromInputField(testData.Invalid_Journey_Detail.BOARDING_CITY);
-    await BusSearch.toInputField(testData.Invalid_Journey_Detail.DESTINATION_CITY);
-    await BusSearch.selectDate(testData.Invalid_Journey_Detail.DATE_OF_JOURNEY);
-    await BusSearch.pressSearchButton();
-
-    await BusSearch.verifyNoServiceMessage();
+    await homePage.verifyNoServiceMessage();
 })

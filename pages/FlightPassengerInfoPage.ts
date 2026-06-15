@@ -34,6 +34,7 @@ export class FlightPassengerInfoPage {
 
     async cancleFreeCancellation() {
         await this.cancleRadioButton.scrollIntoViewIfNeeded();
+        await expect(this.cancleRadioButton).toBeVisible({timeout : 5000});
         await this.cancleRadioButton.click();
     }
 
